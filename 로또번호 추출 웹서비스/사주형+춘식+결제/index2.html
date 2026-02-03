@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🍀 춘식이 사주 로또 (5세트)</title>
+  <style>
+    :root{
+      --bg1:#f6f2e7; --bg2:#efe7d6;
+      --card:#ffffffcc; --stroke:rgba(24, 32, 48, .12);
+      --shadow: 0 20px 60px rgba(15, 23, 42, 0.18);
+      --text:#142033; --sub: rgba(20, 32, 51, .68);
+      --btn1:#22c55e; --btn2:#16a34a;
+      --radius: 26px;
+      --butter:#e8c572; --pink:#f7a3b0;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 20%, rgba(92,169,91,.18), transparent 55%),
+        radial-gradient(900px 500px at 85% 30%, rgba(232,197,114,.18), transparent 55%),
+        radial-gradient(900px 500px at 50% 95%, rgba(247,163,176,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      position:relative;
+      z-index:1;
+      width:min(1120px, 92vw);
+      margin: clamp(18px, 4vw, 36px) auto;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+    }
+    @media (max-width: 980px){ .wrap{ grid-template-columns: 1fr; } }
+
+    .panel{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      overflow:hidden;
+      position:relative;
+    }
+    .panel::before{
+      content:"";
+      position:absolute; inset:-40px;
+      background:
+        radial-gradient(240px 240px at 20% 20%, rgba(185,206,137,.35), transparent 62%),
+        radial-gradient(220px 220px at 80% 10%, rgba(232,197,114,.26), transparent 60%),
+        radial-gradient(220px 220px at 85% 85%, rgba(247,163,176,.22), transparent 62%);
+      pointer-events:none; z-index:0;
+    }
+    .panel > *{ position:relative; z-index:1; }
+
+    .left{ padding: 22px 22px 18px; }
+
+    .title-row{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    h1{ margin:0; font-size: clamp(20px, 2.2vw, 28px); letter-spacing:-0.5px; line-height:1.1; }
+    .subtitle{ margin:8px 0 0; color:var(--sub); font-size: 14px; line-height:1.4; }
+
+    .badge{
+      display:flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius: 999px;
+      border:1px solid rgba(20,32,51,.12);
+      background: rgba(255,255,255,.75);
+      box-shadow: 0 10px 22px rgba(20,32,51,.08);
+      white-space:nowrap; user-select:none;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--btn1), var(--btn2));
+      box-shadow: 0 0 0 4px rgba(34,197,94,.18);
+    }
+    .badge span{ font-size: 12px; color: rgba(20,32,51,.75); font-weight:900; }
+
+    .form{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 560px){ .form{ grid-template-columns: 1fr; } }
+
+    .field{
+      background: rgba(255,255,255,.58);
+      border: 1px solid rgba(20,32,51,.14);
+      border-radius: 16px;
+      padding: 10px 12px;
+      box-shadow: 0 10px 22px rgba(20,32,51,.06);
+    }
+    .field label{
+      display:block; font-size: 12px; color: rgba(20,32,51,.68);
+      font-weight: 950; margin-bottom: 6px; letter-spacing:-0.2px;
+    }
+    .field input, .field textarea{
+      width:100%; border:none; outline:none; background: transparent;
+      font-size: 14px; color: rgba(20,32,51,.92); font-weight: 850;
+      resize: vertical;
+    }
+    .field small{
+      display:block; margin-top: 6px; font-size: 11px;
+      color: rgba(20,32,51,.55); line-height:1.25;
+    }
+
+    /* ✅ 캡처대로 버튼 배치 */
+    .controls{
+      margin-top: 12px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .row1, .row2{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+
+    button{
+      border:none; border-radius: 16px; padding: 12px 14px; cursor:pointer;
+      font-weight: 980;
+      transition: transform .12s ease, filter .14s ease, opacity .14s ease;
+      user-select:none;
+      display:flex; align-items:center; gap:10px;
+      letter-spacing:-0.2px;
+    }
+    button:active{ transform: translateY(1px) scale(.99); }
+    button:hover{ filter: brightness(1.02); }
+
+    .btn-main{
+      background: linear-gradient(135deg, var(--btn1), var(--btn2));
+      color: #062012;
+      box-shadow: 0 14px 28px rgba(22,163,74,.22);
+      flex: 1;
+      min-width: 280px;
+      position:relative;
+      overflow:hidden;
+    }
+    .btn-main::after{
+      content:""; position:absolute; inset:-40px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), transparent 40%);
+      transform: translateX(-20%); opacity:.85; pointer-events:none;
+    }
+
+    .btn-ghost{
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(20,32,51,.14);
+      color: rgba(20,32,51,.86);
+      box-shadow: 0 10px 22px rgba(20,32,51,.08);
+    }
+
+    .btn-icon{
+      width: 34px; height: 34px;
+      border-radius: 999px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.65);
+      border:1px solid rgba(20,32,51,.12);
+    }
+
+    .meta{
+      margin-top: 12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      color: rgba(20,32,51,.68); font-size: 13px;
+    }
+    .toast{
+      margin-top: 12px;
+      min-height: 20px;
+      font-size: 13px;
+      color: rgba(20,32,51,.70);
+    }
+
+    /* RIGHT */
+    .hero{ padding: 18px 18px 0; display:flex; align-items:center; gap:14px; }
+    .hero-img{
+      width: 108px; height: 108px; border-radius: 26px; overflow:hidden;
+      border: 1px solid rgba(20,32,51,.12);
+      box-shadow: 0 16px 30px rgba(20,32,51,.14);
+      flex: 0 0 auto; background: rgba(255,255,255,.65);
+    }
+    .hero-img img{ width:100%; height:100%; object-fit:cover; transform: scale(1.08); }
+    .hero-text .big{ font-weight: 1000; letter-spacing:-0.6px; font-size: 16px; margin:0 0 6px; }
+    .hero-text .small{ margin:0; color: rgba(20,32,51,.64); font-size: 13px; line-height:1.35; }
+
+    .result{ padding: 14px 18px 18px; display:flex; flex-direction:column; gap: 12px; }
+
+    .fortune-card{
+      background: rgba(255,255,255,.66);
+      border: 1px solid rgba(20,32,51,.12);
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(20,32,51,.10);
+      overflow:hidden;
+      position:relative;
+    }
+    .fortune-inner{ padding: 14px; }
+
+    .tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 12px; }
+    .tab{
+      padding: 8px 12px; border-radius: 999px;
+      font-weight: 950; font-size: 12px;
+      border: 1px solid rgba(20,32,51,.14);
+      background: rgba(255,255,255,.55);
+      color: rgba(20,32,51,.78);
+      user-select:none;
+    }
+    .tab.active{
+      border-color: rgba(22,163,74,.45);
+      box-shadow: 0 0 0 4px rgba(34,197,94,.12);
+      color: rgba(7, 83, 43, .95);
+    }
+
+    .icons{
+      display:grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px; margin-bottom: 12px;
+    }
+    @media (max-width: 520px){ .icons{ grid-template-columns: repeat(3, 1fr); } }
+    .icon-item{
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding: 10px 8px;
+      border-radius: 16px;
+      border: 1px solid rgba(20,32,51,.12);
+      background: rgba(255,255,255,.55);
+      box-shadow: 0 10px 18px rgba(20,32,51,.06);
+      gap: 6px; text-align:center;
+    }
+    .icon-emoji{
+      width: 40px; height: 40px; border-radius: 999px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(20,32,51,.10);
+      font-size: 18px;
+    }
+    .icon-label{ font-size: 12px; font-weight: 950; color: rgba(20,32,51,.80); }
+    .icon-score{ font-size: 11px; color: rgba(20,32,51,.58); font-weight: 900; }
+
+    .fortune-title{ font-weight: 1000; letter-spacing: -0.6px; font-size: 16px; margin: 0; }
+    .fortune-date{ margin: 6px 0 0; font-size: 12px; color: rgba(20,32,51,.58); font-weight: 900; }
+
+    .keyword{ margin: 12px 0 10px; font-size: 18px; font-weight: 1000; letter-spacing:-0.6px; }
+    .kw-pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px; border-radius: 14px;
+      border: 1px solid rgba(20,32,51,.12);
+      background: rgba(255,255,255,.62);
+      box-shadow: 0 10px 18px rgba(20,32,51,.08);
+    }
+
+    .fortune-text{ margin: 0; font-size: 13px; color: rgba(20,32,51,.74); line-height: 1.55; }
+
+    .section{ margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(20,32,51,.18); }
+    .sec-h{ margin:0 0 8px; font-size: 13px; font-weight: 1000; color: rgba(20,32,51,.86); display:flex; gap:8px; align-items:center; }
+    .bullets{ margin:0; padding-left: 18px; color: rgba(20,32,51,.74); font-size: 13px; line-height: 1.55; }
+
+    .pill{
+      font-size: 12px; padding: 7px 10px; border-radius: 999px;
+      border: 1px solid rgba(20,32,51,.12);
+      background: rgba(255,255,255,.62);
+      color: rgba(20,32,51,.78);
+      font-weight: 950;
+      display:inline-flex; align-items:center; gap:8px;
+      box-shadow: 0 10px 16px rgba(20,32,51,.06);
+    }
+
+    .lucky{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .lucky .num{
+      width: 38px; height: 38px; border-radius: 999px;
+      display:grid; place-items:center;
+      font-weight: 1000;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.22), 0 10px 16px rgba(15,23,42,.16);
+      user-select:none;
+    }
+
+    .sets{ display:grid; gap: 10px; }
+    .set-card{
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(20,32,51,.12);
+      border-radius: 18px;
+      padding: 12px 12px 10px;
+      box-shadow: 0 10px 22px rgba(20,32,51,.08);
+      overflow:hidden;
+    }
+    .set-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .set-label{ font-weight: 1000; font-size: 13px; color: rgba(20,32,51,.82); display:flex; gap:8px; align-items:center; }
+    .set-pill{
+      font-size: 11px; padding: 4px 8px; border-radius: 999px;
+      border: 1px solid rgba(20,32,51,.12);
+      background: rgba(255,255,255,.6);
+      color: rgba(20,32,51,.70);
+      font-weight: 950;
+    }
+    .mini-btn{
+      padding: 8px 10px; border-radius: 14px; font-size: 12px;
+      background: rgba(255,255,255,.7);
+      border:1px solid rgba(20,32,51,.12);
+      color: rgba(20,32,51,.82);
+      box-shadow: 0 8px 14px rgba(20,32,51,.08);
+      cursor:pointer; font-weight:950;
+      display:flex; align-items:center; gap:8px;
+    }
+
+    .balls{ margin-top: 10px; display:flex; flex-wrap:wrap; gap: 8px; min-height: 48px; }
+    .ball{
+      width: 44px; height: 44px; border-radius: 999px; display:grid; place-items:center;
+      font-weight: 1000; color: rgba(11, 18, 32, .92);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.22), 0 10px 18px rgba(15,23,42,.18);
+      user-select:none;
+    }
+    .r1{ background: linear-gradient(135deg, #fbbf24, var(--butter)); }
+    .r2{ background: linear-gradient(135deg, #93c5fd, #60a5fa); }
+    .r3{ background: linear-gradient(135deg, #fda4af, var(--pink)); }
+    .r4{ background: linear-gradient(135deg, #86efac, #34d399); }
+    .r5{ background: linear-gradient(135deg, #c4b5fd, #a78bfa); }
+
+    .loading{ pointer-events:none; opacity:.92; filter:saturate(1.05); }
+    .loading .btn-icon{ animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    details{
+      background: rgba(255,255,255,.55);
+      border:1px solid rgba(20,32,51,.12);
+      border-radius: 16px;
+      padding: 10px 12px;
+      box-shadow: 0 10px 18px rgba(20,32,51,.06);
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 950;
+      color: rgba(20,32,51,.82);
+      list-style:none;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    summary::-webkit-details-marker{ display:none; }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <!-- LEFT -->
+    <section class="panel left">
+      <div class="title-row">
+        <div>
+          <h1>🍀 춘식이 사주 로또 (5세트)</h1>
+          <p class="subtitle">
+            간단 정보 넣으면 “오늘의 사주” 느낌으로 결과 뽑아준다냥 🐾<br/>
+            행운 숫자 뽑고 → 그 숫자 포함 세트도 만들 수 있다냥!
+          </p>
+        </div>
+        <div class="badge"><span class="dot"></span><span>재미용이냥</span></div>
+      </div>
+
+      <div class="form">
+        <div class="field">
+          <label for="inpName">이름</label>
+          <input id="inpName" type="text" placeholder="예) 민석" autocomplete="name"/>
+          <small>비워도 된다냥</small>
+        </div>
+
+        <div class="field">
+          <label for="inpBirth">생년월일</label>
+          <input id="inpBirth" type="date" />
+          <small>오늘 운세는 날짜 따라 바뀐다냥</small>
+        </div>
+
+        <div class="field" style="grid-column: 1 / -1;">
+          <label for="inpKeyword">오늘의 한 줄(선택)</label>
+          <input id="inpKeyword" type="text" placeholder="예) 돈복가즈아 / 피곤함 / 기분좋음" />
+          <small>키워드 넣으면 기운이 살짝 섞인다냥</small>
+        </div>
+
+        <!-- ✅ 실제 네이버 결과 붙여넣기 -->
+        <div class="field" style="grid-column: 1 / -1;">
+          <details>
+            <summary>🧾 네이버 사주 결과 붙여넣기(실제 텍스트 기반) <span class="pill">신빙성 +100</span></summary>
+            <div style="margin-top:10px;">
+              <textarea id="inpPaste" rows="6"
+                placeholder="네이버 사주 화면에서 ‘운세의 총운은 ○○○○ 입니다’부터 설명/금전운 부분까지 복사해서 여기에 붙여넣어라냥"></textarea>
+              <small>
+                ⚠️ 자동으로 네이버에서 가져오기는 브라우저/정책 제약 때문에 불안정하다냥. 대신 복붙하면 ‘진짜 내용’으로 보여준다냥.
+              </small>
+              <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn-ghost" id="btnApplyPaste"><span class="btn-icon">✨</span><span>붙여넣은 사주 적용</span></button>
+                <button class="btn-ghost" id="btnOpenNaver" type="button"><span class="btn-icon">🔎</span><span>네이버 사주 열기</span></button>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- ✅ 캡처대로: 1줄째 (메인 + 행운뽑기) / 2줄째 (행운포함/전체복사/초기화) -->
+      <div class="controls">
+        <div class="row1">
+          <button class="btn-main" id="btnPick">
+            <span class="btn-icon">🎲</span><span>사주 기운으로 5세트 뽑기</span>
+          </button>
+          <button class="btn-ghost" id="btnLucky">
+            <span class="btn-icon">🍀</span><span>행운의 숫자 뽑기</span>
+          </button>
+        </div>
+
+        <div class="row2">
+          <button class="btn-ghost" id="btnLuckySets">
+            <span class="btn-icon">🧧</span><span>행운 포함 5세트</span>
+          </button>
+          <button class="btn-ghost" id="btnCopyAll">
+            <span class="btn-icon">📋</span><span>전체 복사</span>
+          </button>
+          <button class="btn-ghost" id="btnReset">
+            <span class="btn-icon">🧼</span><span>초기화</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div id="seedInfo">기운: 대기중이냥</div>
+        <div id="stamp">대기 중</div>
+      </div>
+
+      <div class="toast" id="toast">먼저 뽑아보라냥 🐾</div>
+    </section>
+
+    <!-- RIGHT -->
+    <section class="panel">
+      <div class="hero">
+        <div class="hero-img">
+          <img id="mascot" alt="캐릭터" src="./mascot.png" />
+        </div>
+        <div class="hero-text">
+          <p class="big">오늘의 사주 + 로또 5세트다냥 🎁</p>
+          <p class="small">사자성어 + 설명 + 금전운 정리 + 행운 숫자 + 번호 세트까지 한 방에다냥</p>
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="fortune-card">
+          <div class="fortune-inner">
+            <div class="tabs">
+              <div class="tab active">오늘의 운세</div>
+              <div class="tab">내일의 운세</div>
+              <div class="tab">이주의 운세</div>
+              <div class="tab">이달의 운세</div>
+            </div>
+
+            <div class="icons" id="iconsRow"></div>
+
+            <h3 class="fortune-title" id="fortuneTitle">운세의 총운은 … 이다냥</h3>
+            <div class="fortune-date" id="fortuneDate">—</div>
+
+            <div class="keyword">
+              <span class="kw-pill" id="keywordPill">📝 오늘의 사주: -</span>
+            </div>
+
+            <p class="fortune-text" id="fortuneText">여기엔 춘식이가 사주 느낌으로 요약을 말해준다냥.</p>
+
+            <div class="section">
+              <div class="sec-h">💎 금전운 정리(춘식이 버전)</div>
+              <ul class="bullets" id="moneyBullets"></ul>
+              <div style="margin-top:10px;">
+                <span class="pill" id="moneyPill">금전운: -</span>
+              </div>
+            </div>
+
+            <div class="section">
+              <div class="sec-h">🍀 행운의 숫자</div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                <div class="lucky" id="luckyNums"></div>
+                <span class="pill" id="luckyHint">아직 행운 숫자 안 뽑았다냥</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sets" id="sets"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const setsEl  = document.getElementById("sets");
+    const stampEl = document.getElementById("stamp");
+    const toastEl = document.getElementById("toast");
+    const seedInfoEl = document.getElementById("seedInfo");
+
+    const btnPick      = document.getElementById("btnPick");
+    const btnLucky     = document.getElementById("btnLucky");
+    const btnLuckySets = document.getElementById("btnLuckySets");
+    const btnCopyAll   = document.getElementById("btnCopyAll");
+    const btnReset     = document.getElementById("btnReset");
+
+    const inpName    = document.getElementById("inpName");
+    const inpBirth   = document.getElementById("inpBirth");
+    const inpKeyword = document.getElementById("inpKeyword");
+
+    const inpPaste   = document.getElementById("inpPaste");
+    const btnApplyPaste = document.getElementById("btnApplyPaste");
+    const btnOpenNaver  = document.getElementById("btnOpenNaver");
+
+    const mascotImg  = document.getElementById("mascot");
+
+    const iconsRowEl     = document.getElementById("iconsRow");
+    const fortuneTitleEl = document.getElementById("fortuneTitle");
+    const fortuneDateEl  = document.getElementById("fortuneDate");
+    const keywordPillEl  = document.getElementById("keywordPill");
+    const fortuneTextEl  = document.getElementById("fortuneText");
+    const moneyBulletsEl = document.getElementById("moneyBullets");
+    const moneyPillEl    = document.getElementById("moneyPill");
+    const luckyNumsEl    = document.getElementById("luckyNums");
+    const luckyHintEl    = document.getElementById("luckyHint");
+
+    // 이미지 폴백(깨짐 도배 방지)
+    function setMascotFallback() {
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fff7e6"/>
+              <stop offset="1" stop-color="#f2ead7"/>
+            </linearGradient>
+          </defs>
+          <rect width="180" height="180" rx="34" fill="url(#bg)"/>
+          <ellipse cx="90" cy="112" rx="62" ry="52" fill="#f2b37b" fill-opacity=".95"/>
+          <circle cx="70" cy="105" r="8" fill="#1c2a3a"/>
+          <circle cx="110" cy="105" r="8" fill="#1c2a3a"/>
+          <ellipse cx="90" cy="120" rx="18" ry="14" fill="#fff"/>
+          <ellipse cx="58" cy="120" rx="14" ry="12" fill="#f7a3b0" fill-opacity=".75"/>
+          <ellipse cx="122" cy="120" rx="14" ry="12" fill="#f7a3b0" fill-opacity=".75"/>
+        </svg>`;
+      mascotImg.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.trim());
+    }
+    mascotImg.addEventListener("error", setMascotFallback);
+
+    let currentSets = [];
+    let currentLucky = [];
+    let currentFortune = null;
+
+    // RNG
+    function xmur3(str) {
+      let h = 1779033703 ^ str.length;
+      for (let i = 0; i < str.length; i++) {
+        h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+        h = (h << 13) | (h >>> 19);
+      }
+      return function() {
+        h = Math.imul(h ^ (h >>> 16), 2246822507);
+        h = Math.imul(h ^ (h >>> 13), 3266489909);
+        h ^= h >>> 16;
+        return h >>> 0;
+      };
+    }
+    function mulberry32(seed) {
+      let a = seed >>> 0;
+      return function() {
+        a |= 0;
+        a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function todayISO() {
+      const d = new Date();
+      const pad = (x) => String(x).padStart(2,"0");
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    }
+    function nowStamp() {
+      const d = new Date();
+      const pad = (x) => String(x).padStart(2,"0");
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
+    function setToast(msg){ toastEl.textContent = msg; }
+
+    function scoreLabel(x){
+      if (x >= 85) return "아주 좋음";
+      if (x >= 70) return "좋음";
+      if (x >= 55) return "무난";
+      if (x >= 40) return "주의";
+      return "조심";
+    }
+
+    function renderIcons(scores){
+      const items = [
+        {emoji:"🧿", label:"총운", val: scores.total},
+        {emoji:"💗", label:"애정운", val: scores.love},
+        {emoji:"💎", label:"금전운", val: scores.money},
+        {emoji:"🪪", label:"직장운", val: scores.work},
+        {emoji:"🎓", label:"학업/성적", val: scores.study},
+        {emoji:"🛡️", label:"건강운", val: scores.health},
+      ];
+      iconsRowEl.innerHTML = "";
+      items.forEach(it=>{
+        const div = document.createElement("div");
+        div.className = "icon-item";
+        div.innerHTML = `
+          <div class="icon-emoji">${it.emoji}</div>
+          <div class="icon-label">${it.label}</div>
+          <div class="icon-score">${it.val}점 · ${scoreLabel(it.val)}</div>
+        `;
+        iconsRowEl.appendChild(div);
+      });
+    }
+
+    function renderFortune(f){
+      currentFortune = f;
+      fortuneTitleEl.textContent = f.headline;
+      fortuneDateEl.textContent = todayISO();
+      keywordPillEl.textContent = `📝 오늘의 사주: ${f.keyword} (춘식이식 요약)`;
+      fortuneTextEl.textContent = f.desc;
+
+      moneyBulletsEl.innerHTML = "";
+      f.moneyBullets.forEach(t=>{
+        const li = document.createElement("li");
+        li.textContent = t;
+        moneyBulletsEl.appendChild(li);
+      });
+      moneyPillEl.textContent = `금전운: ${f.scores.money}점 · ${scoreLabel(f.scores.money)}  ${f.moneyTags.map(x=>`#${x}`).join(" ")}`;
+
+      renderIcons(f.scores);
+      seedInfoEl.textContent = `기운: ${f.keyword} · 금전운 ${f.scores.money}점 (${scoreLabel(f.scores.money)}) 이다냥`;
+    }
+
+    // 기본 사주 데이터(복붙 없을 때 fallback)
+    const SAJU_LIST = [
+      { key:"도청도설", headline:"운세의 총운은 도청도설이다냥",
+        desc:"여기저기 말이 많고 생각도 많아지는 날이다냥. 중요한 건 ‘순서’부터 잡아라냥. 하나만 끝내고 다음으로 넘어가면 운이 정리된다냥.",
+        money:["지출은 ‘필요/욕심’ 두 칸으로 나눠라냥. 욕심 칸은 24시간 보류다냥.",
+               "자동이체/구독 결제 싹 점검하면 돈이 안 샌다냥.",
+               "충동구매 들어오면 장바구니에 넣고 잠깐만 참아라냥."],
+        moneyTag:["절약","누수점검","충동방지"]
+      },
+      { key:"일취월장", headline:"운세의 총운은 일취월장이다냥",
+        desc:"조금만 해도 성과가 보이는 날이다냥. 시작이 반이다냥. 단, 욕심내서 한 번에 크게 하려고 하면 삐끗한다냥.",
+        money:["부수입/포인트/캐시백 같은 ‘잔돈 회수’가 꽤 쏠쏠하다냥.",
+               "큰 수익보다 ‘반복 가능한 작은 이득’이 돈복이다냥.",
+               "가격 비교 5분만 해도 이득 보는 날이다냥."],
+        moneyTag:["잔돈회수","반복이득","비교필수"]
+      },
+      { key:"유비무환", headline:"운세의 총운은 유비무환이다냥",
+        desc:"미리 준비하면 마음이 편해지는 날이다냥. 체크리스트 3개로 줄이면 된다냥.",
+        money:["예산을 ‘고정/변동/예비’로 3칸만 나눠도 돈이 안 샌다냥.",
+               "비상금(예비비) 한 칸 만들어두면 안정된다냥.",
+               "투자보다 ‘현금흐름’ 점검이 더 센 날이다냥."],
+        moneyTag:["예산","비상금","흐름점검"]
+      },
+    ];
+
+    function fortuneFallbackFromSeed(seed32){
+      const rng = mulberry32(seed32);
+      const picked = SAJU_LIST[Math.floor(rng() * SAJU_LIST.length)];
+      const scores = {
+        total: Math.floor(rng()*41) + 50,
+        love:  Math.floor(rng()*51) + 40,
+        money: Math.floor(rng()*51) + 40,
+        work:  Math.floor(rng()*51) + 40,
+        study: Math.floor(rng()*51) + 40,
+        health:Math.floor(rng()*51) + 40
+      };
+      const extra = [];
+      if (scores.money >= 75) extra.push("돈 들어올 구멍도 보이는데, 욕심만 줄이면 더 좋다냥.");
+      else if (scores.money <= 50) extra.push("오늘은 ‘새로 벌기’보다 ‘안 새게 막기’가 이득이다냥.");
+      else extra.push("지출만 컨트롤하면 무난하게 간다냥.");
+      return {
+        keyword: picked.key,
+        headline: picked.headline,
+        desc: picked.desc,
+        moneyBullets: [...picked.money, ...extra],
+        moneyTags: picked.moneyTag,
+        scores
+      };
+    }
+
+    // ✅ 네이버 텍스트 복붙 파싱(“운세의 총운은 도청도설 입니다” 형태)
+    function parseNaverPaste(text){
+      const t = (text || "").trim();
+      if (!t) return null;
+
+      // 사자성어 추출 후보: "운세의 총운은 XXXXX 입니다" / "운세의 총운은 XXXXX입니다"
+      const m = t.match(/운세의\s*총운은\s*([가-힣]{2,6})\s*입니?다/);
+      const keyword = m ? m[1] : null;
+
+      // 금전운 구간이 따로 있으면 좋지만, 보통 복붙에 섞여 오니까
+      // 그냥 전체에서 ‘금전’ 관련 문장 몇 개를 뽑아 요약
+      const lines = t
+        .split(/\n+/)
+        .map(x=>x.trim())
+        .filter(Boolean);
+
+      const mainDesc = lines.slice(0, 6).join(" ");
+      const moneyCandidates = lines.filter(x => /금전|재물|돈|지출|수입|투자|구매|계약|결제/.test(x));
+      const moneyBullets = (moneyCandidates.length ? moneyCandidates : [
+        "금전운 문장이 복붙에 없으면, 전체 내용 기준으로 무난 요약한다냥.",
+      ]).slice(0, 4).map(x => x.replace(/\s+/g," "));
+
+      // 점수는 “실제 네이버에 점수 표기”가 복붙에 없으면 추정치로
+      const seed32 = xmur3(t + "|" + todayISO())();
+      const rng = mulberry32(seed32);
+      const scores = {
+        total: Math.floor(rng()*31) + 60,
+        love:  Math.floor(rng()*51) + 40,
+        money: Math.floor(rng()*51) + 40,
+        work:  Math.floor(rng()*51) + 40,
+        study: Math.floor(rng()*51) + 40,
+        health:Math.floor(rng()*51) + 40
+      };
+
+      return {
+        keyword: keyword || "오늘의 사주",
+        headline: keyword ? `운세의 총운은 ${keyword}이다냥` : "운세의 총운은 오늘의 사주다냥",
+        desc: mainDesc.length ? mainDesc : "복붙한 내용이 짧다냥… 좀 더 길게 붙여넣어주라냥.",
+        moneyBullets,
+        moneyTags: ["실제복붙","요약"],
+        scores
+      };
+    }
+
+    // Lotto
+    function rangeClass(n) {
+      if (n <= 10) return "r1";
+      if (n <= 20) return "r2";
+      if (n <= 30) return "r3";
+      if (n <= 40) return "r4";
+      return "r5";
+    }
+    function pickOneSet(rng, mustInclude=[]) {
+      const s = new Set(mustInclude.slice(0,6));
+      while (s.size < 6) s.add(Math.floor(rng() * 45) + 1);
+      return [...s].sort((a,b)=>a-b);
+    }
+    function pickFiveSetsWithSeed(seed, mustInclude=[]) {
+      const out = [];
+      for (let i=0;i<5;i++){
+        const rng = mulberry32((seed + i * 0x9E3779B9) >>> 0);
+        out.push(pickOneSet(rng, mustInclude));
+      }
+      return out;
+    }
+    function renderSets(sets) {
+      setsEl.innerHTML = "";
+      sets.forEach((nums, idx) => {
+        const card = document.createElement("div");
+        card.className = "set-card";
+
+        const top = document.createElement("div");
+        top.className = "set-top";
+
+        const label = document.createElement("div");
+        label.className = "set-label";
+        label.innerHTML = `세트 ${idx+1} <span class="set-pill">${nums.join("-")}</span>`;
+
+        const btn = document.createElement("button");
+        btn.className = "mini-btn";
+        btn.type = "button";
+        btn.textContent = "📋 복사";
+        btn.onclick = async () => {
+          try{
+            await navigator.clipboard.writeText(nums.join(", "));
+            setToast(`복사 완료다냥 ✅ (세트 ${idx+1})`);
+          }catch{
+            setToast("복사가 안 된다냥… 브라우저 권한 확인해달라냥 😿");
+          }
+        };
+
+        top.appendChild(label);
+        top.appendChild(btn);
+
+        const balls = document.createElement("div");
+        balls.className = "balls";
+        nums.forEach(n=>{
+          const b = document.createElement("div");
+          b.className = `ball ${rangeClass(n)}`;
+          b.textContent = n;
+          balls.appendChild(b);
+        });
+
+        card.appendChild(top);
+        card.appendChild(balls);
+        setsEl.appendChild(card);
+      });
+    }
+
+    function renderLuckyNumbers(nums){
+      luckyNumsEl.innerHTML = "";
+      nums.forEach(n=>{
+        const div = document.createElement("div");
+        div.className = `num ${rangeClass(n)}`;
+        div.textContent = n;
+        luckyNumsEl.appendChild(div);
+      });
+      luckyHintEl.textContent = nums.length
+        ? `행운 숫자 ${nums.length}개 뽑았다냥 → 이거 포함 세트 가능!`
+        : "아직 행운 숫자 안 뽑았다냥";
+    }
+
+    function computeSeed(){
+      const name = (inpName.value||"").trim();
+      const birth = (inpBirth.value||"").trim();
+      const key = (inpKeyword.value||"").trim();
+      return xmur3(`name=${name}|birth=${birth}|key=${key}|today=${todayISO()}`)();
+    }
+
+    function pickLuckyNumbers(seed32){
+      const rng = mulberry32(seed32 ^ 0xA5A5A5A5);
+      const count = (Math.floor(rng()*2) + 2); // 2 or 3
+      const s = new Set();
+      while (s.size < count) s.add(Math.floor(rng()*45) + 1);
+      return [...s].sort((a,b)=>a-b);
+    }
+
+    function refreshFortune(){
+      // 복붙이 있으면 그걸 우선
+      const pasted = parseNaverPaste(inpPaste.value);
+      if (pasted){
+        renderFortune(pasted);
+        return;
+      }
+      const seed32 = computeSeed();
+      renderFortune(fortuneFallbackFromSeed(seed32));
+    }
+
+    // init
+    (function init(){
+      refreshFortune();
+      renderLuckyNumbers([]);
+    })();
+
+    btnApplyPaste.onclick = () => {
+      const parsed = parseNaverPaste(inpPaste.value);
+      if (!parsed){
+        setToast("복붙 내용이 비었다냥… 네이버 사주 내용 복사해서 붙여넣어라냥!");
+        return;
+      }
+      renderFortune(parsed);
+      setToast("실제 네이버 내용 기반으로 적용했다냥 ✅");
+    };
+
+    btnOpenNaver.onclick = () => {
+      window.open(
+        "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EB%84%A4%EC%9D%B4%EB%B2%84+%EC%82%AC%EC%A3%BC",
+        "_blank",
+        "noopener,noreferrer"
+      );
+      setToast("네이버 사주 열어줬다냥. 거기서 내용 복사해서 붙여넣어라냥!");
+    };
+
+    btnLucky.onclick = () => {
+      refreshFortune();
+      const seed32 = computeSeed();
+      currentLucky = pickLuckyNumbers(seed32);
+      renderLuckyNumbers(currentLucky);
+      setToast(`행운의 숫자 ${currentLucky.join(", ")} 뽑았다냥 🍀`);
+    };
+
+    btnPick.onclick = () => {
+      refreshFortune();
+      const seed32 = computeSeed();
+      const must = currentLucky.length ? currentLucky : [];
+      currentSets = pickFiveSetsWithSeed(seed32, must);
+      renderSets(currentSets);
+      stampEl.textContent = `뽑은 시간: ${nowStamp()}`;
+      setToast(must.length ? "사주 기운 + 행운 포함으로 5세트 뽑았다냥 🧧" : "사주 기운으로 5세트 뽑았다냥 🐾");
+    };
+
+    btnLuckySets.onclick = () => {
+      refreshFortune();
+      const seed32 = computeSeed();
+      if (!currentLucky.length){
+        currentLucky = pickLuckyNumbers(seed32);
+        renderLuckyNumbers(currentLucky);
+      }
+      currentSets = pickFiveSetsWithSeed(seed32 ^ 0x55AA55AA, currentLucky);
+      renderSets(currentSets);
+      stampEl.textContent = `뽑은 시간: ${nowStamp()}`;
+      setToast(`행운 숫자 ${currentLucky.join(", ")} 포함 5세트 만들었다냥 🧧`);
+    };
+
+    btnCopyAll.onclick = async () => {
+      if (!currentSets.length) { setToast("아직 뽑은 게 없다냥. 먼저 뽑아라냥!"); return; }
+      const text =
+        `오늘의 사주: ${currentFortune?.keyword || "-"}\n금전운: ${currentFortune?.scores?.money ?? "-"}점\n행운의 숫자: ${currentLucky.length? currentLucky.join(", ") : "없음"}\n\n` +
+        currentSets.map((s, i) => `세트 ${i+1}: ${s.join(", ")}`).join("\n");
+      try{
+        await navigator.clipboard.writeText(text);
+        setToast("전체 복사 완료다냥 ✅");
+      }catch{
+        setToast("복사가 안 된다냥… 브라우저 권한 확인해달라냥 😿");
+      }
+    };
+
+    btnReset.onclick = () => {
+      currentSets = [];
+      currentLucky = [];
+      setsEl.innerHTML = "";
+      stampEl.textContent = "대기 중";
+      renderLuckyNumbers([]);
+      setToast("초기화했다냥. 다시 뽑아보라냥 🎲");
+      refreshFortune();
+    };
+  </script>
+</body>
+</html>

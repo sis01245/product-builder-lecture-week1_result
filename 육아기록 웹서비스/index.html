@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>육아 기록</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --danger: #fb7185;
+      --line: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1220 0%, #050814 100%);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.3px;
+    }
+    .sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 820px) {
+      .grid { grid-template-columns: 360px 1fr; }
+    }
+
+    .card {
+      background: rgba(17,24,39,0.78);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin: 10px 0 6px;
+    }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(2,6,23,0.55);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(96,165,250,0.7);
+      box-shadow: 0 0 0 3px rgba(96,165,250,0.15);
+    }
+    textarea { min-height: 76px; resize: vertical; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    button {
+      border: 1px solid var(--line);
+      background: rgba(96,165,250,0.15);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { background: rgba(96,165,250,0.25); }
+    button.danger {
+      background: rgba(251,113,133,0.14);
+    }
+    button.danger:hover {
+      background: rgba(251,113,133,0.24);
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .toolbar .left, .toolbar .right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .pill {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(2,6,23,0.35);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+    thead th {
+      text-align: left;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 10px;
+      background: rgba(2,6,23,0.45);
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+    tbody td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+      vertical-align: top;
+    }
+    tbody tr:hover {
+      background: rgba(255,255,255,0.04);
+    }
+    .typeTag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--text);
+      background: rgba(2,6,23,0.35);
+      white-space: nowrap;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--accent);
+    }
+    .dot.feed { background: #60a5fa; }
+    .dot.diaper { background: #34d399; }
+    .dot.sleep { background: #a78bfa; }
+    .dot.memo { background: #fbbf24; }
+
+    .muted { color: var(--muted); }
+    .miniBtn {
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+    }
+    .miniBtn:hover { background: rgba(255,255,255,0.10); }
+
+    .empty {
+      padding: 14px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>🍼 육아 기록</h1>
+        <div class="sub">수유 / 기저귀 / 수면 / 메모를 빠르게 남기는 간단 웹페이지</div>
+      </div>
+      <div class="pill" id="countPill">기록 0개</div>
+    </header>
+
+    <div class="grid">
+      <!-- 입력 카드 -->
+      <section class="card">
+        <h2>기록 추가</h2>
+
+        <label>종류</label>
+        <select id="type">
+          <option value="feed">수유</option>
+          <option value="diaper">기저귀</option>
+          <option value="sleep">수면</option>
+          <option value="memo">메모</option>
+        </select>
+
+        <div class="row">
+          <div>
+            <label>날짜/시간</label>
+            <input id="dt" type="datetime-local" />
+          </div>
+          <div>
+            <label>양/시간(숫자)</label>
+            <input id="amount" type="number" placeholder="예: 120" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>단위</label>
+            <select id="unit">
+              <option value="ml">ml (수유)</option>
+              <option value="min">min (분)</option>
+              <option value="times">회</option>
+              <option value="etc">기타</option>
+            </select>
+          </div>
+          <div>
+            <label>세부</label>
+            <select id="detail">
+              <option value="">(선택)</option>
+              <option value="formula">분유</option>
+              <option value="breast">모유</option>
+              <option value="pee">소변</option>
+              <option value="poop">대변</option>
+              <option value="both">소+대</option>
+              <option value="nap">낮잠</option>
+              <option value="night">야간수면</option>
+            </select>
+          </div>
+        </div>
+
+        <label>메모</label>
+        <textarea id="note" placeholder="예: 트림 잘함 / 배앓이 있음 / 기분 좋음 / 약 먹임 등"></textarea>
+
+        <div class="actions">
+          <button id="addBtn">+ 기록 저장</button>
+          <button id="quickNowBtn" class="miniBtn">지금 시간 넣기</button>
+          <button id="resetBtn" class="miniBtn">입력 초기화</button>
+        </div>
+
+        <hr style="border:0;border-top:1px solid var(--line); margin:14px 0;" />
+
+        <div class="actions">
+          <button id="exportBtn" class="miniBtn">CSV 내보내기</button>
+          <button id="clearAllBtn" class="danger miniBtn">전체 삭제</button>
+        </div>
+
+        <div style="margin-top:10px" class="muted">
+          • 기록은 이 브라우저에 저장됨 (localStorage)<br/>
+          • “양/시간”은 수유량(ml)이나 수면시간(min) 등으로 자유롭게 쓰면 됨
+        </div>
+      </section>
+
+      <!-- 목록 카드 -->
+      <section class="card">
+        <div class="toolbar">
+          <div class="left">
+            <h2 style="margin:0;">기록 목록</h2>
+            <span class="pill" id="lastPill">최근 없음</span>
+          </div>
+          <div class="right">
+            <select id="filterType" style="width:auto;">
+              <option value="all">전체</option>
+              <option value="feed">수유</option>
+              <option value="diaper">기저귀</option>
+              <option value="sleep">수면</option>
+              <option value="memo">메모</option>
+            </select>
+            <select id="sortOrder" style="width:auto;">
+              <option value="desc">최신순</option>
+              <option value="asc">오래된순</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="listArea"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // ===== 데이터 구조 =====
+    // { id, type, dtISO, amount, unit, detail, note }
+
+    const STORAGE_KEY = "baby_log_v1";
+
+    const el = (id) => document.getElementById(id);
+
+    const typeEl = el("type");
+    const dtEl = el("dt");
+    const amountEl = el("amount");
+    const unitEl = el("unit");
+    const detailEl = el("detail");
+    const noteEl = el("note");
+
+    const addBtn = el("addBtn");
+    const quickNowBtn = el("quickNowBtn");
+    const resetBtn = el("resetBtn");
+    const exportBtn = el("exportBtn");
+    const clearAllBtn = el("clearAllBtn");
+
+    const filterTypeEl = el("filterType");
+    const sortOrderEl = el("sortOrder");
+
+    const listArea = el("listArea");
+    const countPill = el("countPill");
+    const lastPill = el("lastPill");
+
+    function loadLogs() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveLogs(logs) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    }
+
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function toDatetimeLocalValue(date) {
+      // yyyy-MM-ddTHH:mm
+      const y = date.getFullYear();
+      const m = pad(date.getMonth() + 1);
+      const d = pad(date.getDate());
+      const hh = pad(date.getHours());
+      const mm = pad(date.getMinutes());
+      return `${y}-${m}-${d}T${hh}:${mm}`;
+    }
+
+    function fmtKorean(date) {
+      const y = date.getFullYear();
+      const m = pad(date.getMonth() + 1);
+      const d = pad(date.getDate());
+      const hh = pad(date.getHours());
+      const mm = pad(date.getMinutes());
+      return `${y}.${m}.${d} ${hh}:${mm}`;
+    }
+
+    function typeLabel(t) {
+      return ({
+        feed: "수유",
+        diaper: "기저귀",
+        sleep: "수면",
+        memo: "메모",
+      })[t] || t;
+    }
+
+    function dotClass(t) {
+      return ({
+        feed: "feed",
+        diaper: "diaper",
+        sleep: "sleep",
+        memo: "memo",
+      })[t] || "feed";
+    }
+
+    function resetForm() {
+      typeEl.value = "feed";
+      dtEl.value = "";
+      amountEl.value = "";
+      unitEl.value = "ml";
+      detailEl.value = "";
+      noteEl.value = "";
+    }
+
+    function getFilteredSorted(logs) {
+      let out = [...logs];
+
+      const ft = filterTypeEl.value;
+      if (ft !== "all") {
+        out = out.filter(x => x.type === ft);
+      }
+
+      const order = sortOrderEl.value;
+      out.sort((a, b) => {
+        const ta = new Date(a.dtISO).getTime();
+        const tb = new Date(b.dtISO).getTime();
+        return order === "asc" ? (ta - tb) : (tb - ta);
+      });
+
+      return out;
+    }
+
+    function render() {
+      const logs = loadLogs();
+      countPill.textContent = `기록 ${logs.length}개`;
+
+      if (logs.length > 0) {
+        const latest = logs.reduce((acc, cur) =>
+          new Date(cur.dtISO) > new Date(acc.dtISO) ? cur : acc
+        );
+        lastPill.textContent = `최근: ${typeLabel(latest.type)} · ${fmtKorean(new Date(latest.dtISO))}`;
+      } else {
+        lastPill.textContent = "최근 없음";
+      }
+
+      const view = getFilteredSorted(logs);
+
+      if (view.length === 0) {
+        listArea.innerHTML = `<div class="empty">표시할 기록이 없어 😶<br/>왼쪽에서 기록을 추가해줘</div>`;
+        return;
+      }
+
+      let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>시간</th>
+              <th>종류</th>
+              <th>양/시간</th>
+              <th>세부</th>
+              <th>메모</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      for (const item of view) {
+        const d = new Date(item.dtISO);
+        const amountText = (item.amount === "" || item.amount === null || item.amount === undefined)
+          ? "-"
+          : `${item.amount} ${item.unit || ""}`.trim();
+
+        html += `
+          <tr>
+            <td>${fmtKorean(d)}</td>
+            <td>
+              <span class="typeTag">
+                <span class="dot ${dotClass(item.type)}"></span>
+                ${typeLabel(item.type)}
+              </span>
+            </td>
+            <td>${amountText}</td>
+            <td class="muted">${item.detail || "-"}</td>
+            <td>${(item.note || "").replaceAll("<", "&lt;").replaceAll(">", "&gt;") || "-"}</td>
+            <td style="text-align:right;">
+              <button class="miniBtn danger" onclick="deleteOne('${item.id}')">삭제</button>
+            </td>
+          </tr>
+        `;
+      }
+
+      html += `</tbody></table>`;
+      listArea.innerHTML = html;
+    }
+
+    // 삭제 (전역으로 노출)
+    window.deleteOne = function(id) {
+      const logs = loadLogs().filter(x => x.id !== id);
+      saveLogs(logs);
+      render();
+    }
+
+    // ===== 이벤트 =====
+    quickNowBtn.addEventListener("click", () => {
+      dtEl.value = toDatetimeLocalValue(new Date());
+    });
+
+    resetBtn.addEventListener("click", () => resetForm());
+
+    addBtn.addEventListener("click", () => {
+      const dtValue = dtEl.value;
+      if (!dtValue) {
+        alert("날짜/시간을 입력해줘! (또는 '지금 시간 넣기')");
+        return;
+      }
+
+      const item = {
+        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random(),
+        type: typeEl.value,
+        dtISO: new Date(dtValue).toISOString(),
+        amount: amountEl.value === "" ? "" : Number(amountEl.value),
+        unit: unitEl.value,
+        detail: detailEl.value,
+        note: noteEl.value.trim(),
+      };
+
+      const logs = loadLogs();
+      logs.push(item);
+      saveLogs(logs);
+
+      // 다음 입력을 편하게
+      amountEl.value = "";
+      noteEl.value = "";
+      detailEl.value = "";
+      dtEl.value = toDatetimeLocalValue(new Date());
+
+      render();
+    });
+
+    filterTypeEl.addEventListener("change", render);
+    sortOrderEl.addEventListener("change", render);
+
+    clearAllBtn.addEventListener("click", () => {
+      const ok = confirm("정말 전체 기록을 삭제할까? (되돌릴 수 없음)");
+      if (!ok) return;
+      localStorage.removeItem(STORAGE_KEY);
+      render();
+    });
+
+    exportBtn.addEventListener("click", () => {
+      const logs = loadLogs();
+      if (logs.length === 0) {
+        alert("내보낼 기록이 없어!");
+        return;
+      }
+
+      const header = ["id","type","datetime","amount","unit","detail","note"];
+      const rows = logs.map(x => [
+        x.id,
+        x.type,
+        x.dtISO,
+        x.amount ?? "",
+        x.unit ?? "",
+        x.detail ?? "",
+        (x.note ?? "").replaceAll("\n", " ")
+      ]);
+
+      const csv = [header, ...rows]
+        .map(r => r.map(v => `"${String(v).replaceAll('"','""')}"`).join(","))
+        .join("\n");
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `baby_log_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    // 초기값: 시간 자동 세팅
+    dtEl.value = toDatetimeLocalValue(new Date());
+    render();
+  </script>
+</body>
+</html>

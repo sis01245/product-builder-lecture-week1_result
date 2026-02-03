@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:support.claude.com)",
+      "WebFetch(domain:www.truefoundry.com)"
+    ]
+  }
+}
