@@ -1,0 +1,7 @@
+{
+  "name": "lotto-saju-web",
+  "compatibility_date": "2026-02-03",
+  "assets": {
+    "directory": "./로또번호 추출 웹서비스/saju_lotto"
+  }
+}
