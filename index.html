@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🍀 춘식이 로또 5세트 추천기</title>
+  <title>🍀 야옹신 로또 번호 추천기</title>
 
   <style>
     :root{
+      /* LIGHT MODE COLORS */
       --bg1:#f6f2e7;
       --bg2:#efe7d6;
       --card:#ffffffcc;
@@ -22,45 +23,118 @@
 
       --btn1:#22c55e;
       --btn2:#16a34a;
+      
+      --gold: #fbbf24;
+      --silver: #94a3b8;
+      --bronze: #b45309;
 
       --radius: 26px;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    /* DARK MODE COLORS */
+    body.dark-mode {
+      --bg1: #1a0b14;   
+      --bg2: #2d1b2e;   
+      --card: rgba(45, 27, 46, 0.75);
+      --stroke: rgba(255, 200, 200, 0.15);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+      --text: #eaddcf;  
+      --sub: rgba(234, 221, 207, 0.6);
+
+      --mint: #d946ef;  
+      --mint2: #a21caf; 
+      --butter: #f59e0b; 
+      --pink: #be123c;   
+      
+      --btn1: #db2777; 
+      --btn2: #9d174d;
+      
+      --gold: #f59e0b;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+    html,body{
+      height:100%;
+    }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 15% 20%, rgba(92,169,91,.18), transparent 55%),
-        radial-gradient(900px 500px at 85% 30%, rgba(232,197,114,.18), transparent 55%),
-        radial-gradient(900px 500px at 50% 95%, rgba(247,163,176,.14), transparent 55%),
+        radial-gradient(1200px 600px at 15% 20%, rgba(92,169,91,.15), transparent 55%),
+        radial-gradient(900px 500px at 85% 30%, rgba(232,197,114,.15), transparent 55%),
+        radial-gradient(900px 500px at 50% 95%, rgba(247,163,176,.12), transparent 55%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
       overflow-x:hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    
+    body.dark-mode {
+        background:
+        radial-gradient(1200px 600px at 20% 20%, rgba(162, 28, 175, 0.15), transparent 55%),
+        radial-gradient(900px 500px at 80% 80%, rgba(190, 18, 60, 0.12), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
     }
 
     .bg-bubbles{
-      position:fixed; inset:0;
-      pointer-events:none; z-index:0;
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
       opacity:.55;
     }
     .bubble{
       position:absolute;
-      width: 180px; height: 180px;
+      width: 180px;
+      height: 180px;
       border-radius: 999px;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.7), rgba(255,255,255,.15));
       border: 1px solid rgba(255,255,255,.5);
       box-shadow: 0 18px 45px rgba(20,32,51,.08);
       animation: floaty 10s ease-in-out infinite;
     }
-    .bubble.b1{ left:-40px; top:18%; width:220px; height:220px; animation-duration: 12s; }
-    .bubble.b2{ right:-60px; top:8%; width:260px; height:260px; animation-duration: 14s; }
-    .bubble.b3{ left:12%; bottom:-80px; width:240px; height:240px; animation-duration: 16s; }
-    .bubble.b4{ right:18%; bottom:-120px; width:300px; height:300px; animation-duration: 18s; }
+    body.dark-mode .bubble {
+      background: radial-gradient(circle at 30% 30%, rgba(255, 100, 150, .15), rgba(100, 0, 50, .05));
+      border: 1px solid rgba(255, 100, 150, .1);
+      box-shadow: 0 18px 45px rgba(0,0,0,.4);
+    }
+    .bubble.b1{
+      left:-40px;
+      top:18%;
+      width:220px;
+      height:220px;
+      animation-duration: 12s;
+    }
+    .bubble.b2{
+      right:-60px;
+      top:8%;
+      width:260px;
+      height:260px;
+      animation-duration: 14s;
+    }
+    .bubble.b3{
+      left:12%;
+      bottom:-80px;
+      width:240px;
+      height:240px;
+      animation-duration: 16s;
+    }
+    .bubble.b4{
+      right:18%;
+      bottom:-120px;
+      width:300px;
+      height:300px;
+      animation-duration: 18s;
+    }
     @keyframes floaty{
-      0%,100%{ transform: translateY(0) translateX(0) scale(1); }
-      50%{ transform: translateY(-18px) translateX(12px) scale(1.02); }
+      0%,100%{
+        transform: translateY(0) translateX(0) scale(1);
+      }
+      50%{
+        transform: translateY(-18px) translateX(12px) scale(1.02);
+      }
     }
 
     .wrap{
@@ -73,7 +147,9 @@
       gap: 18px;
     }
     @media (max-width: 940px){
-      .wrap{ grid-template-columns: 1fr; }
+      .wrap{
+        grid-template-columns: 1fr;
+      }
     }
 
     .panel{
@@ -82,8 +158,10 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       overflow:hidden;
       position:relative;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .panel::before{
       content:"";
@@ -95,28 +173,59 @@
         radial-gradient(220px 220px at 85% 85%, rgba(247,163,176,.22), transparent 62%);
       pointer-events:none;
       z-index:0;
+      transition: opacity 0.3s;
     }
-    .panel > *{ position:relative; z-index:1; }
+    body.dark-mode .panel::before {
+       opacity: 0.3;
+       background:
+        radial-gradient(240px 240px at 20% 20%, rgba(219, 39, 119, .2), transparent 62%),
+        radial-gradient(220px 220px at 80% 10%, rgba(147, 51, 234, .15), transparent 60%);
+    }
+    .panel > *{
+      position:relative;
+      z-index:1;
+    }
 
-    .left{ padding: 22px 22px 18px; }
+    .left{
+      padding: 22px 22px 18px;
+    }
 
     .title-row{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
+      display: block;
+      margin-bottom: 12px;
     }
+    .title-row::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
     h1{
       margin:0;
       font-size: clamp(20px, 2.2vw, 28px);
       letter-spacing: -0.5px;
-      line-height:1.1;
+      line-height:1.2;
+      transition: color 0.3s;
+      padding-top: 4px;
     }
+    body.dark-mode h1 {
+      text-shadow: 0 0 20px rgba(219, 39, 119, 0.5);
+    }
+    
     .subtitle{
       margin:8px 0 0;
       color:var(--sub);
       font-size: 14px;
-      line-height:1.4;
+      line-height:1.5;
+      word-break: keep-all;
+      clear: left;
+    }
+    .header-actions {
+      float: right;
+      display: flex;
+      gap: 8px;
+      margin-left: 12px;
+      margin-bottom: 4px;
     }
 
     .badge{
@@ -125,20 +234,61 @@
       gap:8px;
       padding:10px 12px;
       border-radius: 999px;
-      border:1px solid rgba(20,32,51,.12);
+      border:1px solid var(--stroke);
       background: rgba(255,255,255,.75);
       box-shadow: 0 10px 22px rgba(20,32,51,.08);
       white-space:nowrap;
       user-select:none;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    body.dark-mode .badge {
+      background: rgba(30, 20, 30, 0.6);
+      box-shadow: 0 10px 22px rgba(0,0,0,.3);
+      border-color: rgba(219, 39, 119, 0.3);
     }
     .dot{
-      width:10px; height:10px; border-radius:999px;
+      width:10px;
+      height:10px;
+      border-radius:999px;
       background: linear-gradient(135deg, var(--btn1), var(--btn2));
       box-shadow: 0 0 0 4px rgba(34,197,94,.18);
     }
-    .badge span{ font-size: 12px; color: rgba(20,32,51,.75); font-weight:900; }
+    body.dark-mode .dot {
+      box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.2);
+    }
+    .badge span{
+      font-size: 12px;
+      color: var(--sub);
+      font-weight:900;
+    }
 
-    /* input area */
+    .theme-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid var(--stroke);
+        background: var(--card);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        line-height: 1;
+        font-size: 20px;
+        transition: transform 0.2s, background 0.2s;
+    }
+    body.dark-mode .theme-btn {
+      background: rgba(255,255,255,0.05);
+      color: #fbbf24;
+    }
+    .theme-btn:hover {
+      transform: scale(1.1);
+    }
+    .theme-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* FORM & INPUTS */
     .form{
       margin-top: 14px;
       display:grid;
@@ -146,37 +296,61 @@
       gap: 10px;
     }
     @media (max-width: 520px){
-      .form{ grid-template-columns: 1fr; }
+      .form{
+        grid-template-columns: 1fr;
+      }
     }
+    
     .field{
       background: rgba(255,255,255,.58);
-      border: 1px solid rgba(20,32,51,.14);
+      border: 1px solid var(--stroke);
       border-radius: 16px;
       padding: 10px 12px;
       box-shadow: 0 10px 22px rgba(20,32,51,.06);
     }
+    body.dark-mode .field {
+      background: rgba(10, 5, 10, 0.3);
+      box-shadow: 0 10px 22px rgba(0,0,0,.2);
+    }
+
     .field label{
       display:block;
       font-size: 12px;
-      color: rgba(20,32,51,.68);
+      color: var(--sub);
       font-weight: 900;
       margin-bottom: 6px;
       letter-spacing:-0.2px;
     }
-    .field input{
+    .field input, .field select{
       width:100%;
       border:none;
       outline:none;
       background: transparent;
       font-size: 14px;
-      color: rgba(20,32,51,.92);
+      color: var(--text);
       font-weight: 800;
+      font-family:inherit;
     }
+    .field select {
+      cursor: pointer;
+    }
+    body.dark-mode input[type="date"] {
+      color-scheme: dark;
+    }
+    body.dark-mode select {
+      color: var(--text);
+    }
+    body.dark-mode select option {
+      background: #1a0b14;
+      color: #fff;
+    }
+
     .field small{
       display:block;
       margin-top: 6px;
       font-size: 11px;
-      color: rgba(20,32,51,.55);
+      color: var(--sub);
+      opacity: 0.8;
       line-height:1.25;
     }
 
@@ -200,8 +374,12 @@
       gap:10px;
       letter-spacing:-0.2px;
     }
-    button:active{ transform: translateY(1px) scale(.99); }
-    button:hover{ filter: brightness(1.02); }
+    button:active{
+      transform: translateY(1px) scale(.99);
+    }
+    button:hover{
+      filter: brightness(1.02);
+    }
 
     .btn-main{
       background: linear-gradient(135deg, var(--btn1), var(--btn2));
@@ -212,6 +390,11 @@
       position:relative;
       overflow:hidden;
     }
+    body.dark-mode .btn-main {
+        background: linear-gradient(135deg, #be123c, #831843);
+        color: #ffe4e6;
+        box-shadow: 0 14px 28px rgba(190, 18, 60, 0.3);
+    }
     .btn-main::after{
       content:"";
       position:absolute;
@@ -221,46 +404,145 @@
       opacity:.8;
       pointer-events:none;
     }
+    
     .btn-ghost{
       background: rgba(255,255,255,.55);
-      border: 1px solid rgba(20,32,51,.14);
-      color: rgba(20,32,51,.86);
+      border: 1px solid var(--stroke);
+      color: var(--text);
       box-shadow: 0 10px 22px rgba(20,32,51,.08);
     }
+    body.dark-mode .btn-ghost {
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 10px 22px rgba(0,0,0,.2);
+    }
+    
     .btn-icon{
-      width: 34px; height: 34px;
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
       display:grid;
       place-items:center;
       background: rgba(255,255,255,.65);
-      border:1px solid rgba(20,32,51,.12);
+      border:1px solid var(--stroke);
+    }
+    body.dark-mode .btn-icon {
+      background: rgba(255,255,255,.1);
     }
 
+    /*REPORT CARD */
+    .report-card {
+        margin-top: 18px;
+        background: rgba(255,255,255,0.7);
+        border: 1px solid var(--stroke);
+        border-radius: 20px;
+        padding: 16px;
+        display: none;
+        flex-direction: column;
+        gap: 12px;
+        animation: slideDown 0.4s ease-out;
+    }
+    body.dark-mode .report-card {
+      background: rgba(0,0,0,0.3);
+      border-color: var(--mint);
+    }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .report-header {
+      font-size: 15px;
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--stroke);
+      padding-bottom: 8px;
+    }
+    .report-score {
+      background: var(--btn1);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .report-body {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .report-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .report-label {
+      flex: 0 0 55px;
+      font-weight: 800;
+      color: var(--sub);
+    }
+    .report-val {
+      flex: 1;
+      font-weight: 600;
+    }
+    
+    .saju-desc {
+        font-size: 13px;
+        color: var(--text);
+        margin-top: 6px;
+        background: rgba(255,255,255,0.5);
+        padding: 10px;
+        border-radius: 12px;
+        line-height: 1.5;
+        border: 1px solid var(--stroke);
+    }
+    body.dark-mode .saju-desc {
+      background: rgba(255,255,255,0.05);
+      color: #e2e8f0;
+    }
+    
+    .lucky-ball {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        background: var(--mint);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 11px;
+        margin-left: 4px;
+        font-weight: bold;
+    }
+    
     .meta{
       margin-top: 12px;
       display:flex;
       justify-content:space-between;
       gap:12px;
       flex-wrap:wrap;
-      color: rgba(20,32,51,.68);
+      color: var(--sub);
       font-size: 13px;
     }
     .toast{
       margin-top: 12px;
       min-height: 20px;
       font-size: 13px;
-      color: rgba(20,32,51,.70);
-    }
-    .footer-hint{
-      margin-top: 10px;
-      font-size: 12px;
-      color: rgba(20,32,51,.58);
-      line-height:1.35;
+      color: var(--sub);
     }
 
-    /* right side */
-    .right{ display:flex; flex-direction:column; }
-
+    /* RIGHT PANEL */
+    .right{
+      display:flex;
+      flex-direction:column;
+    }
     .hero{
       padding: 18px 18px 0;
       display:flex;
@@ -268,22 +550,33 @@
       gap:14px;
     }
     .hero-img{
-      width: 108px; height: 108px;
+      width: 108px;
+      height: 108px;
       border-radius: 26px;
       overflow:hidden;
-      border: 1px solid rgba(20,32,51,.12);
+      border: 1px solid var(--stroke);
       box-shadow: 0 16px 30px rgba(20,32,51,.14);
       flex: 0 0 auto;
       background: rgba(255,255,255,.65);
       position:relative;
     }
+    body.dark-mode .hero-img {
+      background: rgba(0,0,0,.2);
+      box-shadow: 0 16px 30px rgba(0,0,0,.5);
+      border-color: rgba(219, 39, 119, 0.3);
+    }
     .hero-img img{
-      width:100%; height:100%;
+      width:100%;
+      height:100%;
       object-fit:cover;
       transform: scale(1.08);
       filter: saturate(1.06) contrast(1.03);
+      transition: opacity 0.3s ease;
     }
-    .hero-text{ flex:1; min-width:0; }
+    .hero-text{
+      flex:1;
+      min-width:0;
+    }
     .hero-text .big{
       font-weight: 1000;
       letter-spacing:-0.6px;
@@ -295,9 +588,10 @@
     }
     .hero-text .small{
       margin:0;
-      color: rgba(20,32,51,.64);
+      color: var(--sub);
       font-size: 13px;
       line-height:1.35;
+      word-break: keep-all;
     }
 
     .result{
@@ -306,26 +600,101 @@
       flex-direction:column;
       gap: 12px;
     }
-    .sets{ display:grid; gap: 10px; }
+    .sort-area {
+      display: none;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .sets{
+      display:grid;
+      gap: 10px;
+      transition: all 0.5s ease;
+    }
 
     .set-card{
       background: rgba(255,255,255,.65);
-      border: 1px solid rgba(20,32,51,.12);
+      border: 1px solid var(--stroke);
       border-radius: 18px;
       padding: 12px 12px 10px;
       box-shadow: 0 10px 22px rgba(20,32,51,.08);
-      overflow:hidden;
+      overflow:visible;
       position:relative;
+      transition: transform 0.3s ease, border-color 0.3s;
+    }
+    body.dark-mode .set-card {
+      background: rgba(30, 20, 30, 0.4);
+      box-shadow: 0 10px 22px rgba(0,0,0,.2);
     }
     .set-card::before{
       content:"";
       position:absolute;
       inset:-30px;
-      background:
-        radial-gradient(220px 160px at 10% 10%, rgba(185,206,137,.25), transparent 60%),
-        radial-gradient(200px 140px at 80% 20%, rgba(232,197,114,.18), transparent 60%);
+      background: radial-gradient(220px 160px at 10% 10%, rgba(185,206,137,.25), transparent 60%), radial-gradient(200px 140px at 80% 20%, rgba(232,197,114,.18), transparent 60%);
       pointer-events:none;
+      border-radius: inherit;
     }
+    body.dark-mode .set-card::before {
+      opacity: 0.3;
+      background: radial-gradient(220px 160px at 10% 10%, rgba(219, 39, 119, .2), transparent 60%);
+    }
+
+    /* Rank Styles - Badges */
+    .rank-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        padding: 4px 8px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 900;
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        z-index: 5;
+        display: none; 
+        animation: popBadge 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .rank-score {
+        display: block;
+        font-size: 9px;
+        opacity: 0.9;
+        margin-top: 1px;
+        font-weight: 400;
+    }
+    @keyframes popBadge {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .set-card.rank-1 {
+      border: 2px solid var(--gold);
+      transform: scale(1.02);
+      z-index: 2;
+    }
+    .set-card.rank-1 .rank-badge {
+      display: block;
+      background: var(--gold);
+    }
+    
+    .set-card.rank-2 {
+      border: 1.5px solid var(--silver);
+    }
+    .set-card.rank-2 .rank-badge {
+      display: block;
+      background: var(--silver);
+    }
+    
+    .set-card.rank-3 {
+      border: 1.5px solid var(--bronze);
+    }
+    .set-card.rank-3 .rank-badge {
+      display: block;
+      background: var(--bronze);
+    }
+
     .set-top{
       display:flex;
       justify-content:space-between;
@@ -338,7 +707,7 @@
       font-weight: 1000;
       letter-spacing:-0.4px;
       font-size: 13px;
-      color: rgba(20,32,51,.82);
+      color: var(--text);
       display:flex;
       align-items:center;
       gap:8px;
@@ -347,18 +716,22 @@
       font-size: 11px;
       padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(20,32,51,.12);
+      border: 1px solid var(--stroke);
       background: rgba(255,255,255,.6);
-      color: rgba(20,32,51,.70);
+      color: var(--sub);
       font-weight: 950;
     }
+    body.dark-mode .pill {
+      background: rgba(255,255,255,.1);
+    }
+
     .mini-btn{
       padding: 8px 10px;
       border-radius: 14px;
       font-size: 12px;
       background: rgba(255,255,255,.7);
-      border:1px solid rgba(20,32,51,.12);
-      color: rgba(20,32,51,.82);
+      border:1px solid var(--stroke);
+      color: var(--text);
       box-shadow: 0 8px 14px rgba(20,32,51,.08);
       cursor:pointer;
       font-weight:950;
@@ -366,8 +739,16 @@
       align-items:center;
       gap:8px;
       transition: transform .12s ease, opacity .12s ease;
+      text-decoration: none;
     }
-    .mini-btn:active{ transform: translateY(1px); opacity:.9; }
+    body.dark-mode .mini-btn {
+      background: rgba(255,255,255,.1);
+      box-shadow: 0 8px 14px rgba(0,0,0,.2);
+    }
+    .mini-btn:active{
+      transform: translateY(1px);
+      opacity:.9;
+    }
 
     .balls{
       margin-top: 10px;
@@ -378,42 +759,90 @@
       z-index:1;
       min-height: 48px;
     }
-
     .ball{
-      width: 44px; height: 44px;
+      width: 44px;
+      height: 44px;
       border-radius: 999px;
       display:grid;
       place-items:center;
       font-weight: 1000;
       letter-spacing:-0.3px;
       color: rgba(11, 18, 32, .92);
-      box-shadow:
-        inset 0 0 0 2px rgba(255,255,255,.22),
-        0 10px 18px rgba(15,23,42,.18);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.22), 0 10px 18px rgba(15,23,42,.18);
       user-select:none;
       opacity: 0;
       transform: translateY(10px) scale(.92);
       will-change: transform, opacity, filter;
     }
-
+    body.dark-mode .ball {
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,.3), 0 5px 15px rgba(0,0,0,.5);
+        color: #fff;
+        text-shadow: 0 1px 2px rgba(0,0,0,.5);
+    }
     .ball.show{
       animation: pop .52s cubic-bezier(.2,.9,.2,1) both;
       animation-delay: var(--d, 0ms);
     }
     @keyframes pop{
-      from { transform: translateY(10px) scale(.92); opacity: 0; filter: blur(2px); }
-      to   { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+      from {
+        transform: translateY(10px) scale(.92);
+        opacity: 0;
+        filter: blur(2px);
+      }
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+    
+    .ball.lucky {
+      border: 2px solid #fff;
+      box-shadow: 0 0 15px var(--mint2);
+      z-index: 2;
+      transform: scale(1.1);
+    }
+    body.dark-mode .ball.lucky {
+      box-shadow: 0 0 15px #f472b6;
+      border-color: #f472b6;
     }
 
-    .r1{ background: linear-gradient(135deg, #fbbf24, var(--butter)); }
-    .r2{ background: linear-gradient(135deg, #93c5fd, #60a5fa); }
-    .r3{ background: linear-gradient(135deg, #fda4af, var(--pink)); }
-    .r4{ background: linear-gradient(135deg, #86efac, #34d399); }
-    .r5{ background: linear-gradient(135deg, #c4b5fd, #a78bfa); }
+    .r1{
+      background: linear-gradient(135deg, #fbbf24, var(--butter));
+    }
+    .r2{
+      background: linear-gradient(135deg, #93c5fd, #60a5fa);
+    }
+    .r3{
+      background: linear-gradient(135deg, #fda4af, var(--pink));
+    }
+    .r4{
+      background: linear-gradient(135deg, #86efac, #34d399);
+    }
+    .r5{
+      background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+    }
+
+    body.dark-mode .r1 {
+      background: linear-gradient(135deg, #b45309, #d97706);
+    } 
+    body.dark-mode .r2 {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    } 
+    body.dark-mode .r3 {
+      background: linear-gradient(135deg, #9f1239, #e11d48);
+    } 
+    body.dark-mode .r4 {
+      background: linear-gradient(135deg, #14532d, #16a34a);
+    } 
+    body.dark-mode .r5 {
+      background: linear-gradient(135deg, #581c87, #7c3aed);
+    } 
 
     .spark{
       position:absolute;
-      width:10px; height:10px;
+      width:10px;
+      height:10px;
       border-radius:999px;
       background: rgba(255,255,255,.9);
       pointer-events:none;
@@ -421,20 +850,51 @@
       animation: spark .6s ease-out forwards;
       z-index:9999;
     }
+    body.dark-mode .spark {
+      background: #f472b6;
+      box-shadow: 0 0 0 10px rgba(219, 39, 119, .2);
+    }
     @keyframes spark{
-      from{ transform: translate(0,0) scale(.9); opacity: .9; }
-      to  { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+      from{
+        transform: translate(0,0) scale(.9);
+        opacity: .9;
+      }
+      to {
+        transform: translate(var(--dx), var(--dy)) scale(0);
+        opacity: 0;
+      }
     }
 
-    .loading{ pointer-events:none; opacity:.92; filter:saturate(1.05); }
-    .loading .btn-icon{ animation: spin 1s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading{
+      pointer-events:none;
+      opacity:.92;
+      filter:saturate(1.05);
+    }
+    .loading .btn-icon{
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      .bubble{ animation:none; }
-      .ball.show{ animation:none; opacity:1; transform:none; filter:none; }
-      button{ transition:none; }
-      .loading .btn-icon{ animation:none; }
+      .bubble{
+        animation:none;
+      }
+      .ball.show{
+        animation:none;
+        opacity:1;
+        transform:none;
+        filter:none;
+      }
+      button{
+        transition:none;
+      }
+      .loading .btn-icon{
+        animation:none;
+      }
     }
   </style>
 </head>
@@ -451,55 +911,104 @@
     <!-- LEFT -->
     <section class="panel left">
       <div class="title-row">
-        <div>
-          <h1>🍀 춘식이 로또 추천 (5세트)</h1>
-          <p class="subtitle">
-            간단 정보 넣으면 그 기운(?)으로 <b>5세트</b> 뽑아준다냥 🐾<br/>
-            같은 정보면 같은 번호가 나와서 “오늘의 사주” 느낌 난다냥!
-          </p>
+        <div class="header-actions">
+          <button class="theme-btn" id="btnTheme" title="모드 전환">🌙</button>
+          <div class="badge" title="주의">
+            <span class="dot"></span>
+            <span id="txtBadge">재미용이냥</span>
+          </div>
         </div>
-        <div class="badge" title="재미로만 봐라냥">
-          <span class="dot"></span>
-          <span>재미용이냥</span>
-        </div>
+
+        <h1 id="txtTitle">🍀 야옹신 로또 번호 추천</h1>
+        <p class="subtitle" id="txtSub">
+          간단 정보 넣으면 그 기운(?)으로 번호를 뽑아준다냥 🐾<br/>
+          당신만을 위한 오늘의 행운 번호를 확인해보라냥!
+        </p>
       </div>
 
       <!-- 사주 느낌 입력 -->
       <div class="form">
         <div class="field">
           <label for="inpName">이름</label>
-          <input id="inpName" type="text" placeholder="예) 춘식" autocomplete="name"/>
-          <small>비워도 된다냥(그땐 완전 랜덤이냥)</small>
+          <input id="inpName" type="text" placeholder="예) 야옹이" autocomplete="name"/>
         </div>
 
         <div class="field">
           <label for="inpBirth">생년월일</label>
           <input id="inpBirth" type="date" />
-          <small>날짜 넣으면 “오늘의 기운” 고정된다냥</small>
         </div>
 
-        <div class="field" style="grid-column: 1 / -1;">
-          <label for="inpKeyword">오늘의 한 줄(선택)</label>
-          <input id="inpKeyword" type="text" placeholder="예) 기분 좋음 / 피곤함 / 돈복사 가즈아" />
-          <small>한 줄 넣으면 기운이 조금 바뀐다냥(=시드에 섞는다냥)</small>
+        <div class="field">
+            <label for="inpTime">태어난 시간 (선택)</label>
+            <select id="inpTime">
+                <option value="">모름 / 무관</option>
+                <option value="23">자시 (23:30 ~ 01:29)</option>
+                <option value="1">축시 (01:30 ~ 03:29)</option>
+                <option value="3">인시 (03:30 ~ 05:29)</option>
+                <option value="5">묘시 (05:30 ~ 07:29)</option>
+                <option value="7">진시 (07:30 ~ 09:29)</option>
+                <option value="9">사시 (09:30 ~ 11:29)</option>
+                <option value="11">오시 (11:30 ~ 13:29)</option>
+                <option value="13">미시 (13:30 ~ 15:29)</option>
+                <option value="15">신시 (15:30 ~ 17:29)</option>
+                <option value="17">유시 (17:30 ~ 19:29)</option>
+                <option value="19">술시 (19:30 ~ 21:29)</option>
+                <option value="21">해시 (21:30 ~ 23:29)</option>
+            </select>
+        </div>
+
+        <div class="field">
+          <label for="inpKeyword">오늘의 키워드(선택)</label>
+          <input id="inpKeyword" type="text" placeholder="예) 기분 좋음 / 대박" />
         </div>
       </div>
 
       <div class="controls">
         <button class="btn-main" id="btnPick">
           <span class="btn-icon">🎲</span>
-          <span>사주 기운으로 5세트 뽑기</span>
+          <span id="txtBtnPick">사주 기운으로 번호 뽑기</span>
         </button>
 
-        <button class="btn-ghost" id="btnCopyAll" title="5세트 전체 복사">
+        <button class="btn-ghost" id="btnCopyAll" title="전체 복사">
           <span class="btn-icon">📋</span>
-          <span>전체 복사</span>
+          <span id="txtBtnCopy">전체 복사</span>
         </button>
 
         <button class="btn-ghost" id="btnReset" title="초기화">
           <span class="btn-icon">🧼</span>
-          <span>초기화</span>
+          <span id="txtBtnReset">초기화</span>
         </button>
+      </div>
+
+      <!-- SAJU REPORT CARD -->
+      <div class="report-card" id="reportCard">
+        <div class="report-header">
+           <span id="reportTitle">🔮 오늘의 운세 분석</span>
+           <span class="report-score" id="reportScore">95점</span>
+        </div>
+        <div class="report-body">
+            <div class="report-row">
+                <div class="report-label">사주</div>
+                <div class="report-val" id="reportSaju">...</div>
+            </div>
+            
+            <div id="sajuEasyDesc" class="saju-desc"></div>
+
+            <div class="report-row" style="margin-top:10px;">
+                <div class="report-label">총운</div>
+                <div class="report-val" id="reportTotal">...</div>
+            </div>
+            <div class="report-row">
+                <div class="report-label">금전운</div>
+                <div class="report-val" id="reportMoney">...</div>
+            </div>
+            <div class="report-row">
+                <div class="report-label" style="color:var(--mint2)">행운수</div>
+                <div class="report-val" id="reportLuckyMsg">
+                    오늘의 행운 번호 <span class="lucky-ball" id="reportLuckyNum">7</span>
+                </div>
+            </div>
+        </div>
       </div>
 
       <div class="meta">
@@ -516,16 +1025,24 @@
     <!-- RIGHT -->
     <section class="panel right">
       <div class="hero">
-        <div class="hero-img" title="mascot.png를 같은 폴더에 두면 여기 뜬다냥!">
-          <img id="mascot" alt="캐릭터" src="./mascot.png" />
+        <div class="hero-img">
+          <img id="mascot" alt="캐릭터" src="./mascot_bright.png" />
         </div>
         <div class="hero-text">
-          <p class="big">춘식이가 뽑아준 5세트다냥 🎁</p>
-          <p class="small">세트별 <b>복사</b>도 되고, <b>전체 복사</b>도 된다냥!</p>
+          <p class="big" id="txtHeroTitle">야옹신이 뽑아준 번호다냥 🎁</p>
+          <p class="small" id="txtHeroSub">세트별 <b>복사</b>도 되고, <b>전체 복사</b>도 된다냥!</p>
         </div>
       </div>
 
       <div class="result">
+        <div class="sort-area" id="sortArea">
+            <button class="mini-btn" id="btnSort">
+                🏆 기운순 정렬 (TOP 5)
+            </button>
+            <a href="https://www.dhlottery.co.kr/" target="_blank" class="mini-btn" title="동행복권으로 이동">
+                🛒 구매하러 가기
+            </a>
+        </div>
         <div class="sets" id="sets"></div>
       </div>
     </section>
@@ -536,55 +1053,333 @@
     const stampEl = document.getElementById("stamp");
     const toastEl = document.getElementById("toast");
     const seedInfoEl = document.getElementById("seedInfo");
+    
+    // Report Elements
+    const reportCard = document.getElementById("reportCard");
+    const reportTotal = document.getElementById("reportTotal");
+    const reportMoney = document.getElementById("reportMoney");
+    const reportScore = document.getElementById("reportScore");
+    const reportLuckyNum = document.getElementById("reportLuckyNum");
+    const reportLuckyMsg = document.getElementById("reportLuckyMsg");
+    const reportTitle = document.getElementById("reportTitle");
+    const reportSaju = document.getElementById("reportSaju");
+    const sajuEasyDesc = document.getElementById("sajuEasyDesc");
 
     const btnPick    = document.getElementById("btnPick");
     const btnCopyAll = document.getElementById("btnCopyAll");
     const btnReset   = document.getElementById("btnReset");
+    const btnTheme   = document.getElementById("btnTheme");
+    const btnSort    = document.getElementById("btnSort");
+    const sortArea   = document.getElementById("sortArea");
 
     const inpName    = document.getElementById("inpName");
     const inpBirth   = document.getElementById("inpBirth");
+    const inpTime    = document.getElementById("inpTime");
     const inpKeyword = document.getElementById("inpKeyword");
+
+    const txtTitle      = document.getElementById("txtTitle");
+    const txtSub        = document.getElementById("txtSub");
+    const txtBadge      = document.getElementById("txtBadge");
+    
+    const txtBtnPick    = document.getElementById("txtBtnPick");
+    const txtBtnCopy    = document.getElementById("txtBtnCopy");
+    const txtBtnReset   = document.getElementById("txtBtnReset");
+    
+    const txtHeroTitle  = document.getElementById("txtHeroTitle");
+    const txtHeroSub    = document.getElementById("txtHeroSub");
 
     const mascotImg  = document.getElementById("mascot");
 
-    // ✅ 이미지 깨질 때 폴백(작은 SVG data-uri)로 자동 교체 → "도배" 방지
+    const savedTheme = localStorage.getItem("theme");
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    let isDark = savedTheme === "dark" || (!savedTheme && systemDark);
+
+    const TEXTS = {
+      light: {
+        title: "🍀 야옹이 로또 번호 추천",
+        sub: "간단 정보 넣으면 그 기운(?)으로 번호를 뽑아준다냥 🐾<br/>당신만을 위한 오늘의 행운 번호를 확인해보라냥!",
+        badge: "재미용이냥",
+        bPick: "사주 기운으로 번호 뽑기",
+        bCopy: "전체 복사",
+        bReset:"초기화",
+        heroT: "야옹이가 뽑아준 번호다냥 🎁",
+        heroS: "세트별 <b>복사</b>도 되고, <b>전체 복사</b>도 된다냥!",
+        inpNamePh: "예) 야옹이",
+        inpKeyPh: "예) 기분 좋음 / 대박",
+        seedWait: "기운: 대기중이냥",
+        toastInit: "아직 뽑은 번호가 없다냥. 버튼 눌러보라냥!",
+        toastPick: "분석 완료! 행운의 기운을 담아 뽑았다냥 🔮",
+        toastRand: "정보가 없어서 완전 랜덤으로 뽑았다냥 🎲",
+        toastCopy: "전체 복사 완료다냥 ✅",
+        toastReset: "초기화했다냥. 다시 뽑아보라냥 🎲",
+        repTitle: "🔮 오늘의 운세 분석",
+        luckyMsgPre: "오늘의 행운 번호는 ",
+        luckyMsgPost: " 이다냥! 꼭 챙겨가라냥~"
+      },
+      dark: {
+        title: "🍷 몽마 야옹의 은밀한 제안",
+        sub: "너의 정보를 살짝 넘기면... 치명적인 번호를 속삭여주지 💋<br/>피할 수 없는 운명의 번호를 받아들여...",
+        badge: "영혼 계약 📜",
+        bPick: "금단의 번호 소환하기",
+        bCopy: "전부 훔치기",
+        bReset:"기억 소거",
+        heroT: "자, 네가 원하던 욕망 덩어리야... 😈",
+        heroS: "가져가... 하지만 <b>당첨</b>되면 나를 잊지 마... 🍷",
+        inpNamePh: "예) 길 잃은 어린양",
+        inpKeyPh: "예) 부귀영화 / 타락",
+        seedWait: "계약: 대기 중...",
+        toastInit: "망설이지 마... 어서 계약(버튼)을 진행해...",
+        toastPick: "치명적인 운명의 번호를 소환했어... 🩸",
+        toastRand: "겁쟁이군... 무작위 운명에 너를 맡긴다 🌑",
+        toastCopy: "이 번호를 훔쳐가는군... 좋아, 비밀로 해주지.",
+        toastReset: "모든 기억을 지웠어... 다시 처음부터 유혹해봐.",
+        repTitle: "🩸 운명 계약서",
+        luckyMsgPre: "오늘의 행운 번호는 ",
+        luckyMsgPost: "... 운명을 바꿀 열쇠가 될 거야."
+      }
+    };
+
+    function updateTheme() {
+      const t = isDark ? TEXTS.dark : TEXTS.light;
+      
+      if (isDark) {
+        document.body.classList.add("dark-mode");
+        btnTheme.textContent = "☀️";
+        mascotImg.src = "./mascot_dark.png";
+      } else {
+        document.body.classList.remove("dark-mode");
+        btnTheme.textContent = "🌙";
+        mascotImg.src = "./mascot_bright.png";
+      }
+
+      txtTitle.textContent = t.title;
+      txtSub.innerHTML     = t.sub;
+      txtBadge.textContent = t.badge;
+      txtBtnPick.textContent    = t.bPick;
+      txtBtnCopy.textContent    = t.bCopy;
+      txtBtnReset.textContent   = t.bReset;
+      txtHeroTitle.textContent  = t.heroT;
+      txtHeroSub.innerHTML      = t.heroS;
+      reportTitle.textContent   = t.repTitle;
+
+      inpName.placeholder = t.inpNamePh;
+      inpKeyword.placeholder = t.inpKeyPh;
+
+      if (stampEl.textContent === "대기 중") {
+        seedInfoEl.textContent = t.seedWait;
+        toastEl.textContent = t.toastInit;
+      }
+
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    updateTheme();
+
+    btnTheme.addEventListener("click", () => {
+      isDark = !isDark;
+      updateTheme();
+      const rect = btnTheme.getBoundingClientRect();
+      sparkleAt(rect.left + rect.width/2, rect.top + rect.height/2);
+    });
+
     function setMascotFallback() {
+      const bgColor = isDark ? "#1e293b" : "#fff7e6";
       const svg = `
         <svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
-          <defs>
-            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#fff7e6"/>
-              <stop offset="1" stop-color="#f2ead7"/>
-            </linearGradient>
-            <linearGradient id="mint" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#b9ce89"/>
-              <stop offset="1" stop-color="#5ca95b"/>
-            </linearGradient>
-          </defs>
-          <rect width="180" height="180" rx="34" fill="url(#bg)"/>
-          <path d="M62 58 L72 36 L90 54 L108 36 L118 58 L118 80 Q90 96 62 80 Z"
-                fill="url(#mint)" stroke="#3f7c43" stroke-opacity=".35" stroke-width="3" />
-          <circle cx="72" cy="36" r="6" fill="#f5d76e"/>
-          <circle cx="108" cy="36" r="6" fill="#f5d76e"/>
-          <circle cx="90" cy="54" r="6" fill="#f5d76e"/>
-          <ellipse cx="90" cy="112" rx="62" ry="52" fill="#f2b37b" fill-opacity=".95"/>
-          <circle cx="70" cy="105" r="8" fill="#1c2a3a"/>
-          <circle cx="110" cy="105" r="8" fill="#1c2a3a"/>
-          <ellipse cx="90" cy="120" rx="18" ry="14" fill="#fff"/>
-          <ellipse cx="58" cy="120" rx="14" ry="12" fill="#f7a3b0" fill-opacity=".75"/>
-          <ellipse cx="122" cy="120" rx="14" ry="12" fill="#f7a3b0" fill-opacity=".75"/>
+          <rect width="180" height="180" rx="34" fill="${bgColor}"/>
+          <text x="50%" y="50%" font-size="24" text-anchor="middle" dy=".3em" fill="#888">
+            ${isDark ? "Dark Img 404" : "Img 404"}
+          </text>
         </svg>`;
       mascotImg.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.trim());
     }
     mascotImg.addEventListener("error", setMascotFallback);
 
-    let currentSets = []; // [[n..6], ...]
+    // ============================================ 
+    // 🔮 SajuEngine: Enhanced Fortune Logic
+    // ============================================ 
+    const SajuEngine = {
+      GAN: ['갑','을','병','정','무','기','경','신','임','계'],
+      JI:  ['자','축','인','묘','진','사','오','미','신','유','술','해'],
+      
+      DESC_GAN: {'갑':'큰나무','을':'꽃','병':'태양','정':'촛불','무':'큰산','기':'밭','경':'바위','신':'보석','임':'바다','계':'빗물'},
+      DESC_JI:  {'자':'쥐','축':'소','인':'호랑이','묘':'토끼','진':'용','사':'뱀','오':'말','미':'양','신':'원숭이','유':'닭','술':'개','해':'돼지'},
 
-    // --------------------------
-    // ✅ "사주 느낌" 시드 랜덤
-    // - 같은 입력 → 같은 시드 → 같은 결과
-    // - xmur3 + mulberry32 조합
-    // --------------------------
+      ELEMENTS: {
+        '갑':'목', '을':'목', '인':'목', '묘':'목',
+        '병':'화', '정':'화', '사':'화', '오':'화',
+        '무':'토', '기':'토', '진':'토', '술':'토', '축':'토', '미':'토',
+        '경':'금', '신':'금', '유':'금',
+        '임':'수', '계':'수', '해':'수', '자':'수'
+      },
+
+      EASY_DESC: {
+        '목': {
+             '목': {L:'울창한 숲처럼 친구들과 어울리기 좋은 날이다냥! 함께하면 행운이 두 배!', D:'숲이 너무 우거져 앞이 안 보일 수 있어. 곁가지를 쳐내고 네 길을 가라.'},
+             '화': {L:'나무가 불을 만나 활활 타오른다냥! 당신의 열정을 맘껏 뽐낼 기회!', D:'자신을 태워 빛을 내는 형국... 너무 무리하지 마라. 재가 될 수도 있다.'},
+             '토': {L:'나무가 단단한 흙에 뿌리를 내린다냥! 노력한 만큼 결실을 맺는 날!', D:'뿌리가 땅을 파헤치는군. 남의 것을 취해서라도 네 자리를 만들어.'},
+             '금': {L:'도끼로 나무를 다듬어 멋진 가구를 만든다냥! 조금 힘들어도 결과는 대박!', D:'날카로운 칼날이 너를 노린다. 베이지 않으려면 정신 바짝 차려야 해.'},
+             '수': {L:'목마른 나무에 단비가 내린다냥! 귀인의 도움으로 쑥쑥 성장하는 날!', D:'차가운 물이 스며든다. 깊은 침묵 속에서 지혜를 얻을 때야.'}
+        },
+        '화': {
+             '목': {L:'땔감을 얻은 불꽃처럼 기운이 솟아난다냥! 윗사람의 덕을 볼 수 있어.', D:'누군가 장작을 던져주는군. 그 힘을 이용해 더 거대하게 타올라라.'},
+             '화': {L:'불과 불이 만나 파티 분위기다냥! 오늘은 즐겁게 놀아보자!', D:'화마가 덮치는 격이다. 분노를 조절하지 못하면 다칠 수 있어.'},
+             '토': {L:'따뜻한 불이 흙을 감싸준다냥. 베푸는 만큼 복이 돌아오는 날!', D:'모든 걸 태우고 흙으로 돌아갈 텐가? 허무함을 경계해.'},
+             '금': {L:'불로 금을 녹여 보석을 만든다냥! 당신의 능력으로 돈을 버는 날!', D:'쇠를 녹이는 고통을 견뎌라. 그 끝엔 달콤한 보상이 기다린다.'},
+             '수': {L:'불이 너무 뜨거울 땐 물로 식혀야 한다냥. 잠시 쉬어가는 지혜가 필요해.', D:'차가운 현실이 너의 열정을 꺼뜨리려 한다. 불씨를 지켜내.'}
+        },
+        '토': {
+             '목': {L:'흙에 나무를 심는 날! 책임감이 무겁지만 보람찰 거야.', D:'누군가 네 영역을 침범하려 한다. 뺏기지 않게 경계를 늦추지 마.'},
+             '화': {L:'따뜻한 햇살을 받은 흙이다냥! 사랑과 인정을 듬뿍 받는 하루!', D:'뜨거운 열기가 땅을 메마르게 한다. 갈증을 해소할 방법을 찾아.'},
+             '토': {L:'산 넘어 산! 든든한 동료와 함께라면 두려울 게 없다냥.', D:'첩첩산중... 고집을 부리면 고립될 수 있어. 유연하게 대처해.'},
+             '금': {L:'흙 속에서 금을 캐내는 날! 횡재수가 있으니 주위를 잘 살펴봐!', D:'네 안의 욕망을 꺼내라. 숨겨진 보물이 빛을 볼 시간이다.'},
+             '수': {L:'흙으로 튼튼한 댐을 만든다냥! 새어나가는 돈을 꽉 잡을 수 있어.', D:'흐르는 물을 억지로 막으려다간 둑이 터질 수 있어. 조심해.'}
+        },
+        '금': {
+             '목': {L:'도끼로 나무를 다듬어 성과를 낸다냥! 일한 만큼 확실한 보상이!', D:'가차 없이 잘라내라. 감정에 휘둘리면 기회를 놓칠 거야.'},
+             '화': {L:'불에 단련되는 강철이다냥! 시련을 겪을수록 더 빛나는 법!', D:'뜨거운 불길 속에 던져졌다. 녹아내릴지, 명검이 될지는 너에게 달렸어.'},
+             '토': {L:'광산에서 캐낸 귀한 보석이다냥! 어디서나 주목받는 인기쟁이!', D:'어둠 속에서 은밀하게 빛나는 존재감... 조용히 실속을 챙겨.'},
+             '금': {L:'보석끼리 부딪혀 짤랑거린다냥! 친구들과 수다 떨기 좋은 날!', D:'날카로운 칼과 칼의 대결. 피를 보지 않으려면 한발 물러서.'},
+             '수': {L:'맑은 물에 씻긴 보석처럼 반짝인다냥! 당신의 매력이 돋보이는 날!', D:'차갑게 식은 칼날... 냉철한 판단만이 너를 구원할 거야.'}
+        },
+        '수': {
+             '목': {L:'나무에 물을 주는 보람찬 하루다냥! 베푸는 기쁨을 느껴봐.', D:'네 기운이 쉴 새 없이 빠져나간다. 남 좋은 일만 시키지 마.'},
+             '화': {L:'물로 불을 끄는 해결사다냥! 어려운 문제도 척척 해결!', D:'폭주하는 상황을 제압해라. 너만이 이 난장판을 끝낼 수 있어.'},
+             '토': {L:'물길을 막는 댐을 만났다냥. 답답해도 잠시 흐름을 멈추고 생각해보자.', D:'흐르지 못하면 썩는 법. 막힌 곳을 뚫을 우회로를 찾아내.'},
+             '금': {L:'바위 틈에서 솟아나는 맑은 샘물! 아이디어가 콸콸 쏟아진다냥!', D:'날카로운 지성이 너를 돕는다. 차갑고 예리하게 분석해.'},
+             '수': {L:'큰 강물이 되어 바다로 흘러간다냥! 더 넓은 세상으로 나아갈 기회!', D:'심연을 들여다보는 날... 너 자신의 어둠을 마주하고 받아들여.'}
+        }
+      },
+
+      LUCKY_MAP: {
+        '목': [5, 10, 15, 20, 25, 30, 35, 40, 45],
+        '화': [4, 9, 14, 19, 24, 29, 34, 39, 44],
+        '토': [1, 6, 11, 16, 21, 26, 31, 36, 41],
+        '금': [3, 8, 13, 18, 23, 28, 33, 38, 43],
+        '수': [2, 7, 12, 17, 22, 27, 32, 37, 42]
+      },
+
+      getGanji(y, m, d) {
+        let yearVal = y;
+        if (m < 2 || (m === 2 && d < 4)) yearVal = y - 1;
+        const yearIdx = (yearVal - 4) % 60;
+        const yearGan = this.GAN[yearIdx % 10];
+        const yearJi  = this.JI[yearIdx % 12];
+
+        const dayGanIdx = (Math.floor((new Date(y, m-1, d) - new Date(1900, 0, 1)) / 86400000) + 0) % 10;
+        const dayJiIdx  = (Math.floor((new Date(y, m-1, d) - new Date(1900, 0, 1)) / 86400000) + 10) % 12;
+        
+        const dGan = this.GAN[(dayGanIdx + 100000) % 10];
+        const dJi  = this.JI[(dayJiIdx + 100000) % 12];
+        const dElem = this.getElement(dGan);
+
+        return {
+          year: `${yearGan}${yearJi}`,
+          dayGan: dGan,
+          dayJi: dJi,
+          dayElement: dElem,
+          desc: `${dGan}(${this.DESC_GAN[dGan]}/${dElem})`
+        };
+      },
+      
+      getTimeElement(dayGan, hour) {
+          if (!hour && hour !== 0) return null;
+          const h = parseInt(hour);
+          const ganIdxMap = {'갑':0, '을':1, '병':2, '정':3, '무':4, '기':5, '경':6, '신':7, '임':8, '계':9};
+          const baseIdx = ganIdxMap[dayGan];
+          const offset = (baseIdx % 5) * 2;
+          
+          let timeBranchIdx = 0;
+          if (h >= 23 || h < 1) timeBranchIdx = 0;
+          else timeBranchIdx = Math.floor((h - 1) / 2) + 1;
+          
+          const timeGanIdx = (offset + timeBranchIdx) % 10;
+          const tGan = this.GAN[timeGanIdx];
+          return this.getElement(tGan);
+      },
+
+      getElement(char) {
+        if (char === '신') return '금'; 
+        return this.ELEMENTS[char] || '토';
+      },
+
+      analyze(myElem, todayElem, timeElem = null) {
+        const relations = {
+          '목': { '목':'비견', '화':'식상', '토':'재성', '금':'관성', '수':'인성' },
+          '화': { '목':'인성', '화':'비견', '토':'식상', '금':'재성', '수':'관성' },
+          '토': { '목':'관성', '화':'인성', '토':'비견', '금':'식상', '수':'재성' },
+          '금': { '목':'재성', '화':'관성', '토':'인성', '금':'비견', '수':'식상' },
+          '수': { '목':'식상', '화':'재성', '토':'관성', '금':'인성', '수':'비견' }
+        };
+
+        const rel = relations[myElem][todayElem];
+        let timeBonus = 0;
+        if (timeElem) {
+            const timeRel = relations[myElem][timeElem];
+            if (timeRel === '비견' || timeRel === '인성') timeBonus = 5;
+            else if (timeRel === '재성') timeBonus = 3;
+        }
+
+        const TEXT_DB = {
+            '비견': {
+                score: 60,
+                totalL: "친구들과 어울리기 좋은 날! 경쟁보단 협력이 좋다냥.",
+                totalD: "라이벌이 등장했군. 밟고 올라설 준비나 해.",
+                moneyL: "돈이 나가기 쉬우니 지갑 조심! 더치페이 추천.",
+                moneyD: "욕심 부리다 뺏길 수 있다. 내 것은 내가 지켜."
+            },
+            '식상': {
+                score: 85,
+                totalL: "아이디어가 뿜뿜! 뭐든 시작하기 딱 좋은 날이냥!",
+                totalD: "네 재능이 빛을 발하는군... 사람들을 홀려봐.",
+                moneyL: "재주 부려서 돈 버는 날! 열심히 움직여보라냥.",
+                moneyD: "너의 매력 자체가 돈이 된다. 판을 깔아주지."
+            },
+            '재성': {
+                score: 95,
+                totalL: "결과물이 확실한 날! 노력한 만큼 보상 받는다냥!",
+                totalD: "모든 것을 가질 수 있는 날... 욕망을 숨기지 마.",
+                moneyL: "💰 금전운 최상! 로또 사러 가기 딱이다냥!",
+                moneyD: "돈 냄새가 진동하는군. 싹 다 긁어모아."
+            },
+            '관성': {
+                score: 45,
+                totalL: "조금 부담스러운 일이 생길수도... 차분하게 대처하자냥.",
+                totalD: "세상이 너를 억압하려 드는군. 숨 죽이고 기다려.",
+                moneyL: "충동구매 금지! 오늘은 아끼는 게 버는 거다냥.",
+                moneyD: "대가 없는 이득은 없다. 함부로 손대지 마."
+            },
+            '인성': {
+                score: 90,
+                totalL: "귀인이 돕는 날! 가만히 있어도 떡이 생긴다냥?",
+                totalD: "어둠의 조력자가 있다. 계약하기 좋은 날이야.",
+                moneyL: "문서운이 좋다냥! 복권이나 주식도 괜찮을지도?",
+                moneyD: "큰 그림을 그려라. 당장의 현금보다 미래 가치야."
+            }
+        };
+
+        const t = TEXT_DB[rel];
+        const easyDesc = this.EASY_DESC[myElem][todayElem];
+        const finalScore = t.score + timeBonus; 
+        
+        const cand = this.LUCKY_MAP[myElem];
+        const todayCode = new Date().getDate();
+        const myCode = myElem.charCodeAt(0);
+        const luckyNum = cand[(todayCode + myCode) % cand.length];
+
+        return {
+          relation: rel,
+          score: Math.min(100, Math.max(0, finalScore)),
+          luckyNum: luckyNum,
+          light: { total: t.totalL, money: t.moneyL, desc: easyDesc.L },
+          dark:  { total: t.totalD, money: t.moneyD, desc: easyDesc.D }
+        };
+      }
+    };
+    // ============================================ 
+
+    let currentSets = [];
+
     function xmur3(str) {
       let h = 1779033703 ^ str.length;
       for (let i = 0; i < str.length; i++) {
@@ -612,44 +1407,48 @@
 
     function buildSeedString() {
       const name = (inpName.value || "").trim();
-      const birth = (inpBirth.value || "").trim(); // YYYY-MM-DD
+      const birth = (inpBirth.value || "").trim();
+      const time = (inpTime.value || "").trim();
       const key = (inpKeyword.value || "").trim();
+      
+      const now = new Date();
+      const todayStr = `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
 
-      // 입력이 전부 비어 있으면 "완전 랜덤" 모드로 처리
       if (!name && !birth && !key) return null;
-
-      // 사주 느낌이니까 "오늘 날짜"는 일부러 안 섞음 (고정되게)
-      // 대신 키워드로 변주 가능
-      return `name=${name}|birth=${birth}|key=${key}`;
+      return `name=${name}|birth=${birth}|time=${time}|key=${key}|date=${todayStr}`;
     }
 
-    function pickOneSet(rng) {
-      const set = new Set();
-      while (set.size < 6) {
-        const n = Math.floor(rng() * 45) + 1; // 1~45
-        set.add(n);
-      }
-      return [...set].sort((a,b)=>a-b);
-    }
-
-    function pickFiveSetsWithSeed(seed) {
-      // 세트별로 살짝 다른 난수 흐름을 주기 위해 seed를 변형
+    function pickFiveSetsWithSeed(seed, luckyNum = null) {
       const out = [];
       for (let i=0;i<5;i++){
         const rng = mulberry32((seed + i * 0x9E3779B9) >>> 0);
-        out.push(pickOneSet(rng));
+        const set = new Set();
+        if (luckyNum) set.add(luckyNum); 
+        while (set.size < 6) {
+          const n = Math.floor(rng() * 45) + 1;
+          set.add(n);
+        }
+        out.push([...set].sort((a,b)=>a-b));
       }
       return out;
     }
 
     function pickFiveSetsRandom() {
-      // 입력이 없을 땐 기존처럼 완전 랜덤
       const out = [];
       for (let i=0;i<5;i++){
         const rng = () => Math.random();
-        out.push(pickOneSet(rng));
+        out.push(pickOneSetRandom(rng));
       }
       return out;
+    }
+    
+    function pickOneSetRandom(rng) {
+        const set = new Set();
+        while (set.size < 6) {
+          const n = Math.floor(rng() * 45) + 1;
+          set.add(n);
+        }
+        return [...set].sort((a,b)=>a-b);
     }
 
     function rangeClass(n) {
@@ -684,31 +1483,36 @@
     }
 
     async function copyText(text) {
-      try { await navigator.clipboard.writeText(text); return true; }
+      try { await navigator.clipboard.writeText(text); return true; } 
       catch { return false; }
     }
 
-    function renderSets(sets) {
+    function renderSets(sets, luckyNum = null, baseScore = 0) {
       setsEl.innerHTML = "";
       sets.forEach((nums, idx) => {
         const card = document.createElement("div");
         card.className = "set-card";
+        card.dataset.idx = idx; 
+
+        const badge = document.createElement("div");
+        badge.className = "rank-badge";
+        card.appendChild(badge);
 
         const top = document.createElement("div");
         top.className = "set-top";
 
         const label = document.createElement("div");
         label.className = "set-label";
-        label.innerHTML = `세트 ${idx+1} <span class="pill">${nums.join("-")}</span>`;
+        label.innerHTML = `Set ${idx+1} <span class="pill">${nums.join("-")}</span>`;
 
         const btn = document.createElement("button");
         btn.className = "mini-btn";
         btn.type = "button";
-        btn.innerHTML = "📋 복사";
+        btn.innerHTML = "📋";
         btn.addEventListener("click", async (e) => {
           const ok = await copyText(nums.join(", "));
-          if (ok) setToast(`복사 완료다냥 ✅ (세트 ${idx+1})`);
-          else setToast("복사가 안 된다냥… 브라우저 권한 확인해달라냥 😿");
+          if (ok) setToast(`복사 완료 ✅ (Set ${idx+1})`);
+          else setToast("복사 실패... 권한을 확인해.");
           const rect = e.currentTarget.getBoundingClientRect();
           sparkleAt(rect.left + rect.width/2, rect.top + rect.height/2);
         });
@@ -719,9 +1523,17 @@
         const balls = document.createElement("div");
         balls.className = "balls";
 
+        // Score Sync Logic: Base Score +/- 5
+        // Use set numbers sum to create deterministic variation
+        const variation = (nums.reduce((a,b)=>a+b,0) % 11) - 5; // -5 to +5
+        const setScore = Math.min(100, Math.max(0, baseScore + variation));
+        
+        card.dataset.score = setScore;
+
         nums.forEach((n, j) => {
           const b = document.createElement("div");
           b.className = `ball ${rangeClass(n)}`;
+          if (luckyNum && n === luckyNum) b.classList.add("lucky"); 
           b.textContent = n;
           b.style.setProperty("--d", `${(idx*60) + (j*70)}ms`);
           requestAnimationFrame(() => b.classList.add("show"));
@@ -732,6 +1544,9 @@
         card.appendChild(balls);
         setsEl.appendChild(card);
       });
+      
+      btnSort.textContent = "🏆 기운순 정렬 (TOP 5)";
+      btnSort.disabled = false;
     }
 
     function setLoading(on) {
@@ -739,57 +1554,140 @@
       else btnPick.classList.remove("loading");
     }
 
-    function luckCommentFromSeed(seed32) {
-      // seed로 0~99 점수 만들어서 멘트
-      const score = seed32 % 100;
-      if (score >= 85) return `기운 아주 쎄다냥(${score}점) 🍀`;
-      if (score >= 65) return `기운 괜찮다냥(${score}점) 🙂`;
-      if (score >= 40) return `무난무난이다냥(${score}점) 😼`;
-      return `오늘은 침착하게 가자냥(${score}점) 🫠`;
-    }
+    btnSort.addEventListener("click", () => {
+        const cards = Array.from(setsEl.children);
+        cards.sort((a, b) => Number(b.dataset.score) - Number(a.dataset.score));
+        
+        setsEl.innerHTML = "";
+        cards.forEach((card, i) => {
+            card.classList.remove("rank-1", "rank-2", "rank-3");
+            const badge = card.querySelector(".rank-badge");
+            badge.style.display = "none"; 
+            
+            const score = card.dataset.score;
+
+            if (i === 0) {
+                card.classList.add("rank-1");
+                badge.innerHTML = `👑 TOP 1<span class="rank-score">오행점수: ${score}</span>`;
+                badge.style.display = "block";
+            }
+            if (i === 1) {
+                card.classList.add("rank-2");
+                badge.innerHTML = `🥈 TOP 2<span class="rank-score">오행점수: ${score}</span>`;
+                badge.style.display = "block";
+            }
+            if (i === 2) {
+                card.classList.add("rank-3");
+                badge.innerHTML = `🥉 TOP 3<span class="rank-score">오행점수: ${score}</span>`;
+                badge.style.display = "block";
+            }
+            setsEl.appendChild(card);
+        });
+        
+        btnSort.textContent = "✨ 정렬 완료!";
+        btnSort.disabled = true;
+    });
 
     btnPick.addEventListener("click", async (e) => {
       setLoading(true);
       const rect = e.currentTarget.getBoundingClientRect();
       sparkleAt(rect.left + rect.width/2, rect.top + rect.height/2);
 
-      await new Promise(r => setTimeout(r, 260));
+      await new Promise(r => setTimeout(r, 600));
 
+      const name = inpName.value.trim();
+      const birth = inpBirth.value; 
+      const time = inpTime.value; 
+      const key = inpKeyword.value.trim();
       const seedStr = buildSeedString();
+      const t = isDark ? TEXTS.dark : TEXTS.light;
+      
+      let luckyNum = null;
+      let baseScore = 50; // default
 
-      if (seedStr) {
+      if (name && birth) {
+        const [by, bm, bd] = birth.split('-').map(Number);
+        const mySaju = SajuEngine.getGanji(by, bm, bd);
+        const now = new Date();
+        const todaySaju = SajuEngine.getGanji(now.getFullYear(), now.getMonth()+1, now.getDate());
+        
+        const myTimeElem = SajuEngine.getTimeElement(mySaju.dayGan, time);
+        const result = SajuEngine.analyze(mySaju.dayElement, todaySaju.dayElement, myTimeElem);
+        luckyNum = result.luckyNum;
+        baseScore = result.score;
+
+        const finalSeedStr = `${seedStr}|score=${result.score}`;
+        const seedFn = xmur3(finalSeedStr);
+        const seed32 = seedFn();
+        
+        currentSets = pickFiveSetsWithSeed(seed32, luckyNum);
+
+        const info = isDark ? result.dark : result.light;
+        reportTotal.textContent = info.total;
+        reportMoney.textContent = info.money;
+        reportScore.textContent = `${result.score}점`;
+        
+        reportLuckyMsg.innerHTML = `${t.luckyMsgPre} <span class="lucky-ball">${luckyNum}</span> ${t.luckyMsgPost}`;
+        
+        reportSaju.innerHTML = `
+            <span style="color:var(--sub)">나:</span> <b>${mySaju.desc}</b><br/>
+            <span style="color:var(--sub)">오늘:</span> <b>${todaySaju.desc}</b>
+        `;
+        sajuEasyDesc.textContent = info.desc; 
+        
+        reportCard.style.display = "flex";
+        sortArea.style.display = "flex"; 
+
+        const timeMsg = time ? " (시간 반영됨)" : "";
+        seedInfoEl.innerHTML = `분석 완료: <b>${name}</b>님의 운명적 번호${timeMsg}`;
+        setToast(t.toastPick);
+
+      } else if (seedStr) {
         const seedFn = xmur3(seedStr);
-        const seed32 = seedFn(); // 32-bit
-        currentSets = pickFiveSetsWithSeed(seed32);
-        seedInfoEl.textContent = `기운: ${luckCommentFromSeed(seed32)} (입력 기반)`;
-        setToast("입력한 기운으로 5세트 뽑아줬다냥 🐾");
+        const seed32 = seedFn();
+        currentSets = pickFiveSetsWithSeed(seed32); 
+        baseScore = seed32 % 100; // random score
+
+        reportCard.style.display = "none";
+        sortArea.style.display = "none";
+        seedInfoEl.textContent = isDark ? "계약: 불완전한 정보..." : "기운: 정보가 조금 부족하다냥!";
+        setToast(t.toastPick);
       } else {
         currentSets = pickFiveSetsRandom();
-        seedInfoEl.textContent = `기운: 랜덤이다냥(입력 없음) 🎲`;
-        setToast("정보가 없어서 완전 랜덤으로 뽑았다냥 🎲");
+        baseScore = Math.floor(Math.random()*100);
+        
+        reportCard.style.display = "none";
+        sortArea.style.display = "none";
+        seedInfoEl.textContent = isDark ? "계약: 무작위 운명 🎲" : "기운: 랜덤이다냥 🎲";
+        setToast(t.toastRand);
       }
 
-      renderSets(currentSets);
-      stampEl.textContent = `뽑은 시간: ${nowStamp()}`;
+      renderSets(currentSets, luckyNum, baseScore);
+      stampEl.textContent = `Time: ${nowStamp()}`;
       setLoading(false);
     });
 
+    // ... existing listeners ...
     btnCopyAll.addEventListener("click", async (e) => {
-      if (!currentSets.length) { setToast("아직 뽑은 게 없다냥. 먼저 뽑아라냥!"); return; }
+      const t = isDark ? TEXTS.dark : TEXTS.light;
+      if (!currentSets.length) { setToast(t.toastInit); return; }
       const text = currentSets.map((s, i) => `세트 ${i+1}: ${s.join(", ")}`).join("\n");
       const ok = await copyText(text);
-      if (ok) setToast("전체 복사 완료다냥 ✅");
-      else setToast("복사가 안 된다냥… 브라우저 권한 확인해달라냥 😿");
+      if (ok) setToast(t.toastCopy);
+      else setToast("복사 실패 😿");
       const rect = e.currentTarget.getBoundingClientRect();
       sparkleAt(rect.left + rect.width/2, rect.top + rect.height/2);
     });
 
     btnReset.addEventListener("click", (e) => {
+      const t = isDark ? TEXTS.dark : TEXTS.light;
       currentSets = [];
       setsEl.innerHTML = "";
       stampEl.textContent = "대기 중";
-      seedInfoEl.textContent = "기운: 대기중이냥";
-      setToast("초기화했다냥. 다시 뽑아보라냥 🎲");
+      seedInfoEl.textContent = t.seedWait;
+      reportCard.style.display = "none";
+      sortArea.style.display = "none";
+      setToast(t.toastReset);
       const rect = e.currentTarget.getBoundingClientRect();
       sparkleAt(rect.left + rect.width/2, rect.top + rect.height/2);
     });
