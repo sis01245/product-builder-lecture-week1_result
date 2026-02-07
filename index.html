@@ -896,6 +896,993 @@
         animation:none;
       }
     }
+
+    /* ============================================
+       당첨자 인증 보드 스타일
+       ============================================ */
+    .winner-section {
+      position: relative;
+      z-index: 1;
+      width: min(1060px, 92vw);
+      margin: 0 auto clamp(18px, 4vw, 36px);
+    }
+
+    .winner-panel {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .winner-panel::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background:
+        radial-gradient(300px 300px at 10% 90%, rgba(251, 191, 36, .2), transparent 60%),
+        radial-gradient(250px 250px at 90% 10%, rgba(247, 163, 176, .15), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body.dark-mode .winner-panel::before {
+      opacity: 0.4;
+      background:
+        radial-gradient(300px 300px at 10% 90%, rgba(251, 191, 36, .15), transparent 60%),
+        radial-gradient(250px 250px at 90% 10%, rgba(219, 39, 119, .1), transparent 60%);
+    }
+    .winner-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 900;
+      margin: 0 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* 명예의 전당 */
+    .hall-of-fame {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 640px) {
+      .hall-of-fame {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 420px) {
+      .hall-of-fame {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .fame-card {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      padding: 16px 12px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    body.dark-mode .fame-card {
+      background: rgba(30, 20, 30, 0.5);
+    }
+    .fame-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    .fame-card.gold { border-color: var(--gold); }
+    .fame-card.silver { border-color: #94a3b8; }
+    .fame-card.bronze { border-color: #b45309; }
+
+    .fame-rank {
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+    .fame-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--sub);
+      margin-bottom: 8px;
+    }
+    .fame-count {
+      font-size: 24px;
+      font-weight: 1000;
+      color: var(--text);
+    }
+    .fame-count span {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--sub);
+    }
+
+    /* 인증하기 버튼 */
+    .add-cert-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--gold), #f59e0b);
+      color: #1a1a1a;
+      font-size: 16px;
+      font-weight: 900;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 24px;
+    }
+    body.dark-mode .add-cert-btn {
+      background: linear-gradient(135deg, #be123c, #f43f5e);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(190, 18, 60, 0.3);
+    }
+    .add-cert-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(251, 191, 36, 0.4);
+    }
+    body.dark-mode .add-cert-btn:hover {
+      box-shadow: 0 14px 36px rgba(190, 18, 60, 0.4);
+    }
+
+    /* 인증 피드 */
+    .cert-feed {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .cert-card {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    body.dark-mode .cert-card {
+      background: rgba(30, 20, 30, 0.6);
+    }
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+    }
+
+    .cert-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sub);
+      font-size: 48px;
+    }
+    .cert-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cert-content {
+      padding: 16px;
+    }
+    .cert-rank-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .cert-rank-badge.rank-1 { background: var(--gold); color: #1a1a1a; }
+    .cert-rank-badge.rank-2 { background: #94a3b8; color: #1a1a1a; }
+    .cert-rank-badge.rank-3 { background: #b45309; color: #fff; }
+    .cert-rank-badge.rank-4 { background: #22c55e; color: #1a1a1a; }
+    .cert-rank-badge.rank-5 { background: #60a5fa; color: #1a1a1a; }
+
+    .cert-comment {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .cert-date {
+      font-size: 12px;
+      color: var(--sub);
+    }
+    .cert-payment {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      padding: 4px 10px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.1));
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #b45309;
+    }
+    body.dark-mode .cert-payment {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(190, 18, 60, 0.1));
+      border-color: rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+    }
+
+    .cert-prize {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      padding: 6px 12px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(22, 163, 74, 0.08));
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #16a34a;
+    }
+    body.dark-mode .cert-prize {
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.12), rgba(34, 197, 94, 0.08));
+      border-color: rgba(74, 222, 128, 0.25);
+      color: #4ade80;
+    }
+    .cert-prize-amount {
+      font-size: 15px;
+    }
+
+    .cert-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .cert-meta-tag {
+      padding: 3px 8px;
+      background: rgba(0,0,0,0.05);
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--sub);
+    }
+    body.dark-mode .cert-meta-tag {
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* 인증 상세 모달 */
+    .detail-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .detail-modal-overlay.show {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .detail-modal {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    body.dark-mode .detail-modal {
+      background: #1a0b14;
+    }
+
+    .detail-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.9);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: transform 0.2s;
+    }
+    body.dark-mode .detail-close {
+      background: rgba(255,255,255,0.15);
+    }
+    .detail-close:hover {
+      transform: scale(1.1);
+    }
+
+    .detail-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      background: #000;
+    }
+
+    .detail-body {
+      padding: 24px;
+    }
+    .detail-rank-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .detail-rank-badge.rank-1 { background: var(--gold); color: #1a1a1a; }
+    .detail-rank-badge.rank-2 { background: #94a3b8; color: #1a1a1a; }
+    .detail-rank-badge.rank-3 { background: #b45309; color: #fff; }
+    .detail-rank-badge.rank-4 { background: #22c55e; color: #1a1a1a; }
+    .detail-rank-badge.rank-5 { background: #60a5fa; color: #1a1a1a; }
+
+    .detail-prize {
+      font-size: 28px;
+      font-weight: 1000;
+      color: #16a34a;
+      margin: 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    body.dark-mode .detail-prize {
+      color: #4ade80;
+    }
+
+    .detail-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .detail-info-item {
+      background: rgba(0,0,0,0.03);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    body.dark-mode .detail-info-item {
+      background: rgba(255,255,255,0.05);
+    }
+    .detail-info-label {
+      font-size: 12px;
+      color: var(--sub);
+      margin-bottom: 4px;
+    }
+    .detail-info-value {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .detail-comment {
+      font-size: 16px;
+      line-height: 1.6;
+      padding: 16px;
+      background: rgba(0,0,0,0.03);
+      border-radius: 12px;
+      margin-top: 16px;
+    }
+    body.dark-mode .detail-comment {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .detail-payment-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.1));
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #b45309;
+    }
+    body.dark-mode .detail-payment-badge {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(190, 18, 60, 0.1));
+      border-color: rgba(244, 63, 94, 0.4);
+      color: #fda4af;
+    }
+
+    /* 추가 입력 필드 스타일 */
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .input-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--sub);
+    }
+    .input-group input, .input-group select {
+      padding: 10px 12px;
+      border: 1px solid var(--stroke);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: rgba(255,255,255,0.6);
+      color: var(--text);
+    }
+    body.dark-mode .input-group input,
+    body.dark-mode .input-group select {
+      background: rgba(0,0,0,0.2);
+    }
+    .input-group input:focus, .input-group select:focus {
+      outline: none;
+      border-color: var(--mint2);
+    }
+
+    /* 커스텀 회차 드롭다운 */
+    .round-dropdown {
+      position: relative;
+    }
+    .round-selector {
+      padding: 10px 12px;
+      border: 1px solid var(--stroke);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: rgba(255,255,255,0.6);
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.2s;
+    }
+    body.dark-mode .round-selector {
+      background: rgba(0,0,0,0.2);
+    }
+    .round-selector:hover {
+      border-color: var(--mint2);
+    }
+    .round-selector .arrow {
+      transition: transform 0.2s;
+    }
+    .round-selector.open .arrow {
+      transform: rotate(180deg);
+    }
+    .round-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-height: 250px;
+      overflow-y: auto;
+      z-index: 100;
+      display: none;
+      margin-top: 4px;
+    }
+    body.dark-mode .round-list {
+      background: #1a0b14;
+    }
+    .round-list.show {
+      display: block;
+      animation: slideDown 0.2s ease;
+    }
+    .round-item {
+      padding: 10px 12px;
+      cursor: pointer;
+      font-size: 13px;
+      border-bottom: 1px solid var(--stroke);
+      transition: background 0.15s;
+    }
+    .round-item:last-child {
+      border-bottom: none;
+    }
+    .round-item:hover {
+      background: rgba(92, 169, 91, 0.1);
+    }
+    body.dark-mode .round-item:hover {
+      background: rgba(219, 39, 119, 0.1);
+    }
+    .round-item.selected {
+      background: rgba(92, 169, 91, 0.15);
+      font-weight: 700;
+    }
+    body.dark-mode .round-item.selected {
+      background: rgba(219, 39, 119, 0.15);
+    }
+    .round-item-main {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .round-item-date {
+      font-size: 11px;
+      color: var(--sub);
+      margin-left: 8px;
+    }
+
+    .prize-display {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.05));
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    body.dark-mode .prize-display {
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(34, 197, 94, 0.05));
+    }
+    .prize-display-label {
+      font-size: 12px;
+      color: var(--sub);
+      margin-bottom: 4px;
+    }
+    .prize-display-amount {
+      font-size: 20px;
+      font-weight: 900;
+      color: #16a34a;
+    }
+    body.dark-mode .prize-display-amount {
+      color: #4ade80;
+    }
+
+    /* 결제 확인 모달 */
+    .payment-confirm-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .payment-confirm-overlay.show {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    .payment-confirm-modal {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    body.dark-mode .payment-confirm-modal {
+      background: #1a0b14;
+    }
+    .payment-confirm-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+    .payment-confirm-title {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .payment-confirm-amount {
+      font-size: 28px;
+      font-weight: 1000;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    body.dark-mode .payment-confirm-amount {
+      color: #f43f5e;
+    }
+    .payment-confirm-desc {
+      font-size: 14px;
+      color: var(--sub);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .payment-confirm-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    .payment-confirm-btn {
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s;
+    }
+    .payment-confirm-btn:hover {
+      transform: translateY(-2px);
+    }
+    .payment-confirm-btn.primary {
+      background: linear-gradient(135deg, var(--gold), #f59e0b);
+      color: #1a1a1a;
+    }
+    body.dark-mode .payment-confirm-btn.primary {
+      background: linear-gradient(135deg, #f43f5e, #be123c);
+      color: #fff;
+    }
+    .payment-confirm-btn.secondary {
+      background: rgba(0,0,0,0.05);
+      color: var(--text);
+    }
+    body.dark-mode .payment-confirm-btn.secondary {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .cert-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--sub);
+      font-size: 15px;
+    }
+    .cert-empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    /* ============================================
+       인증 모달 스타일
+       ============================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.show {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    body.dark-mode .modal-content {
+      background: #1a0b14;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.8);
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding: 0;
+      z-index: 10;
+      transition: transform 0.2s;
+    }
+    body.dark-mode .modal-close {
+      background: rgba(255,255,255,0.1);
+    }
+    .modal-close:hover {
+      transform: scale(1.1);
+    }
+
+    .modal-header {
+      padding: 24px 24px 0;
+      text-align: center;
+    }
+    .modal-title {
+      font-size: 22px;
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 24px;
+    }
+    @media (max-width: 640px) {
+      .modal-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .modal-section {
+      background: rgba(255,255,255,0.5);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    body.dark-mode .modal-section {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .modal-section-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--sub);
+      margin: 0 0 12px;
+    }
+
+    .upload-area {
+      border: 2px dashed var(--stroke);
+      border-radius: 12px;
+      padding: 32px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      margin-bottom: 16px;
+    }
+    .upload-area:hover {
+      border-color: var(--mint2);
+      background: rgba(92, 169, 91, 0.05);
+    }
+    body.dark-mode .upload-area:hover {
+      border-color: var(--mint);
+      background: rgba(219, 39, 119, 0.05);
+    }
+    .upload-area.has-image {
+      padding: 8px;
+    }
+    .upload-area.has-image img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 8px;
+    }
+    .upload-icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+    .upload-text {
+      font-size: 14px;
+      color: var(--sub);
+    }
+    .upload-input {
+      display: none;
+    }
+
+    .comment-input {
+      width: 100%;
+      border: 1px solid var(--stroke);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      resize: none;
+      background: rgba(255,255,255,0.6);
+      color: var(--text);
+    }
+    body.dark-mode .comment-input {
+      background: rgba(0,0,0,0.2);
+    }
+    .comment-input:focus {
+      outline: none;
+      border-color: var(--mint2);
+    }
+    body.dark-mode .comment-input:focus {
+      border-color: var(--mint);
+    }
+
+    .rank-select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--stroke);
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      background: rgba(255,255,255,0.6);
+      color: var(--text);
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+    body.dark-mode .rank-select {
+      background: rgba(0,0,0,0.2);
+    }
+    body.dark-mode .rank-select option {
+      background: #1a0b14;
+    }
+
+    /* 복비 결제 영역 */
+    .payment-section {
+      text-align: center;
+      background: linear-gradient(180deg, rgba(251, 191, 36, 0.08), rgba(255, 255, 255, 0.5)) !important;
+    }
+    body.dark-mode .payment-section {
+      background: linear-gradient(180deg, rgba(190, 18, 60, 0.15), rgba(30, 10, 20, 0.6)) !important;
+    }
+    .payment-mascot {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 16px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(251, 191, 36, 0.3);
+      border: 3px solid rgba(251, 191, 36, 0.3);
+    }
+    body.dark-mode .payment-mascot {
+      box-shadow: 0 12px 32px rgba(190, 18, 60, 0.4);
+      border-color: rgba(244, 63, 94, 0.3);
+    }
+    .payment-mascot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+    }
+    .payment-desc {
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .payment-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+    .payment-option {
+      padding: 10px 16px;
+      border: 2px solid var(--stroke);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.6);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    body.dark-mode .payment-option {
+      background: rgba(255,255,255,0.05);
+    }
+    .payment-option:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    body.dark-mode .payment-option:hover {
+      border-color: #f43f5e;
+    }
+    .payment-option.selected {
+      border-color: var(--gold);
+      background: rgba(251, 191, 36, 0.2);
+      box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+    }
+    body.dark-mode .payment-option.selected {
+      border-color: #f43f5e;
+      background: rgba(244, 63, 94, 0.2);
+      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+    }
+    .payment-custom {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .payment-custom-input {
+      width: 120px;
+      padding: 10px 12px;
+      border: 2px solid var(--stroke);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: right;
+      background: rgba(255,255,255,0.6);
+      color: var(--text);
+      font-family: inherit;
+    }
+    body.dark-mode .payment-custom-input {
+      background: rgba(0,0,0,0.2);
+    }
+    .payment-custom-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    body.dark-mode .payment-custom-input:focus {
+      border-color: #f43f5e;
+    }
+    .payment-custom-label {
+      font-size: 14px;
+      color: var(--sub);
+      font-weight: 600;
+    }
+    .payment-skip {
+      font-size: 12px;
+      color: var(--sub);
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .payment-skip:hover {
+      background: rgba(0,0,0,0.05);
+      color: var(--text);
+    }
+    .payment-skip:hover {
+      color: var(--text);
+    }
+
+    .modal-footer {
+      padding: 0 24px 24px;
+      text-align: center;
+    }
+    .submit-btn {
+      padding: 16px 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--btn1), var(--btn2));
+      color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    body.dark-mode .submit-btn {
+      background: linear-gradient(135deg, #be123c, #831843);
+      box-shadow: 0 10px 30px rgba(190, 18, 60, 0.3);
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+    }
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
   </style>
 </head>
 
@@ -1047,6 +2034,213 @@
       </div>
     </section>
   </main>
+
+  <!-- 당첨자 인증 보드 섹션 -->
+  <section class="winner-section">
+    <div class="winner-panel">
+      <!-- 명예의 전당 -->
+      <h2 class="section-title">🏆 명예의 전당</h2>
+      <div class="hall-of-fame" id="hallOfFame">
+        <div class="fame-card gold">
+          <div class="fame-rank">🥇</div>
+          <div class="fame-label">1등 당첨</div>
+          <div class="fame-count" id="fame1">0<span>명</span></div>
+        </div>
+        <div class="fame-card silver">
+          <div class="fame-rank">🥈</div>
+          <div class="fame-label">2등 당첨</div>
+          <div class="fame-count" id="fame2">0<span>명</span></div>
+        </div>
+        <div class="fame-card bronze">
+          <div class="fame-rank">🥉</div>
+          <div class="fame-label">3등 당첨</div>
+          <div class="fame-count" id="fame3">0<span>명</span></div>
+        </div>
+        <div class="fame-card">
+          <div class="fame-rank">🎯</div>
+          <div class="fame-label">4등 당첨</div>
+          <div class="fame-count" id="fame4">0<span>명</span></div>
+        </div>
+        <div class="fame-card">
+          <div class="fame-rank">🍀</div>
+          <div class="fame-label">5등 당첨</div>
+          <div class="fame-count" id="fame5">0<span>명</span></div>
+        </div>
+      </div>
+
+      <!-- 인증하기 버튼 -->
+      <button class="add-cert-btn" id="btnAddCert">
+        <span>📸</span>
+        <span>당첨 인증하기</span>
+      </button>
+
+      <!-- 인증 피드 -->
+      <h2 class="section-title">📷 당첨 인증 피드</h2>
+      <div class="cert-feed" id="certFeed">
+        <div class="cert-empty">
+          <div class="cert-empty-icon">🎱</div>
+          <p>아직 인증된 당첨 내역이 없다냥!<br/>첫 번째 행운의 주인공이 되어보라냥~</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 인증 모달 -->
+  <div class="modal-overlay" id="certModal">
+    <div class="modal-content">
+      <button class="modal-close" id="btnModalClose">✕</button>
+
+      <div class="modal-header">
+        <h3 class="modal-title">🎉 당첨 인증하기</h3>
+      </div>
+
+      <div class="modal-body">
+        <!-- 좌측: 인증 정보 입력 -->
+        <div class="modal-section">
+          <h4 class="modal-section-title">📸 당첨 인증</h4>
+
+          <div class="input-row">
+            <div class="input-group round-dropdown">
+              <label>회차</label>
+              <div class="round-selector" id="roundSelector">
+                <span id="roundSelectorText">회차 선택</span>
+                <span class="arrow">▼</span>
+              </div>
+              <div class="round-list" id="roundList"></div>
+              <input type="hidden" id="certRound" />
+            </div>
+            <div class="input-group">
+              <label for="certCount">당첨 매수</label>
+              <select id="certCount">
+                <option value="1">1장</option>
+                <option value="2">2장</option>
+                <option value="3">3장</option>
+                <option value="4">4장</option>
+                <option value="5">5장</option>
+                <option value="10">10장</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-group" style="margin-bottom:12px;">
+            <label for="certRank">당첨 등수</label>
+            <select class="rank-select" id="certRank" style="margin-bottom:0;">
+              <option value="1">🥇 1등 (6개 번호 일치)</option>
+              <option value="2">🥈 2등 (5개 + 보너스)</option>
+              <option value="3">🥉 3등 (5개 번호 일치)</option>
+              <option value="4">🎯 4등 (4개 번호 일치)</option>
+              <option value="5">🍀 5등 (3개 번호 일치)</option>
+            </select>
+          </div>
+
+          <div class="input-group" id="prizeInputGroup" style="margin-bottom:12px;">
+            <label for="certPrize">당첨금 (자동 입력 / 수정 가능)</label>
+            <input type="text" id="certPrize" placeholder="회차별 자동 입력됩니다" />
+          </div>
+
+          <div class="prize-display" id="prizeDisplay">
+            <div class="prize-display-label">예상 총 당첨금</div>
+            <div class="prize-display-amount" id="totalPrizeDisplay">₩0</div>
+          </div>
+
+          <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📷</div>
+            <div class="upload-text">당첨 캡처 이미지를 업로드하세요<br/>(클릭 / 드래그 / Ctrl+V 붙여넣기)</div>
+          </div>
+          <input type="file" class="upload-input" id="certImage" accept="image/*" />
+
+          <label for="certComment" class="modal-section-title">한 줄 소감</label>
+          <textarea class="comment-input" id="certComment" rows="3" placeholder="야옹신 덕분에 당첨됐다냥! 🎉"></textarea>
+        </div>
+
+        <!-- 우측: 복비 결제 (선택) -->
+        <div class="modal-section payment-section">
+          <h4 class="modal-section-title" id="paymentTitle">🐱 야옹신에게 복비 드리기</h4>
+          <div class="payment-mascot">
+            <img id="paymentMascot" src="./mascot_happy_bright.png" alt="행복한 야옹신" />
+          </div>
+          <p class="payment-desc">
+            당첨의 기쁨을 나누고 싶다면,<br/>
+            복비를 드려보세요!<br/>
+            <small>(선택사항이며, 없이도 인증 가능합니다)</small>
+          </p>
+
+          <div class="payment-options" id="paymentOptions">
+            <div class="payment-option" data-amount="1000">☕ 1천원</div>
+            <div class="payment-option" data-amount="5000">🍰 5천원</div>
+            <div class="payment-option" data-amount="10000">💝 1만원</div>
+            <div class="payment-option" data-amount="50000">💎 5만원</div>
+            <div class="payment-option" data-amount="100000">👑 10만원</div>
+            <div class="payment-option" data-amount="300000">🏆 30만원</div>
+          </div>
+
+          <div class="payment-custom">
+            <span class="payment-custom-label">직접 입력:</span>
+            <input type="number" class="payment-custom-input" id="paymentCustom" placeholder="금액" min="0" step="1000" />
+            <span class="payment-custom-label">원</span>
+          </div>
+
+          <div class="payment-skip" id="btnSkipPayment">복비 없이 인증하기</div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="submit-btn" id="btnSubmitCert">🎊 인증 게시하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 인증 상세 보기 모달 -->
+  <div class="detail-modal-overlay" id="detailModal">
+    <div class="detail-modal">
+      <button class="detail-close" id="btnDetailClose">✕</button>
+      <img class="detail-image" id="detailImage" src="" alt="당첨 인증 이미지" />
+      <div class="detail-body">
+        <span class="detail-rank-badge" id="detailRankBadge">🥇 1등 당첨</span>
+        <span class="cert-meta-tag" id="detailCount" style="margin-left:8px;">x1</span>
+
+        <div class="detail-prize" id="detailPrize">
+          <span>💰</span>
+          <span id="detailPrizeAmount">₩0</span>
+        </div>
+
+        <div class="detail-info-grid">
+          <div class="detail-info-item">
+            <div class="detail-info-label">회차</div>
+            <div class="detail-info-value" id="detailRound">-</div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-label">인증일</div>
+            <div class="detail-info-value" id="detailDate">-</div>
+          </div>
+        </div>
+
+        <div class="detail-comment" id="detailComment">소감이 없습니다.</div>
+
+        <div class="detail-payment-badge" id="detailPayment" style="display:none;">
+          💝 <span id="detailPaymentAmount">복비 0원</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 결제 확인 모달 -->
+  <div class="payment-confirm-overlay" id="paymentConfirmModal">
+    <div class="payment-confirm-modal">
+      <div class="payment-confirm-icon">💝</div>
+      <div class="payment-confirm-title" id="paymentConfirmTitle">야옹신에게 복비 보내기</div>
+      <div class="payment-confirm-amount" id="paymentConfirmAmount">₩10,000</div>
+      <div class="payment-confirm-desc">
+        후원 버튼을 누르면 후원 페이지가 열립니다.<br/>
+        개인정보 노출 없이 안전하게 후원할 수 있어요!<br/>
+        인증은 먼저 게시됩니다 🙏
+      </div>
+      <div class="payment-confirm-buttons">
+        <button type="button" class="payment-confirm-btn secondary" id="btnPaymentCancel">취소</button>
+        <button type="button" class="payment-confirm-btn primary" id="btnPaymentProceed">☕ 후원하러 가기</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     const setsEl  = document.getElementById("sets");
@@ -1691,6 +2885,763 @@
       const rect = e.currentTarget.getBoundingClientRect();
       sparkleAt(rect.left + rect.width/2, rect.top + rect.height/2);
     });
+
+    // ============================================
+    // 🏆 당첨자 인증 보드 기능
+    // ============================================
+    console.log("인증 보드 초기화 시작...");
+    const certModal = document.getElementById("certModal");
+    const btnAddCert = document.getElementById("btnAddCert");
+    const btnModalClose = document.getElementById("btnModalClose");
+    const btnSubmitCert = document.getElementById("btnSubmitCert");
+    const btnSkipPayment = document.getElementById("btnSkipPayment");
+    const uploadArea = document.getElementById("uploadArea");
+    const certImage = document.getElementById("certImage");
+    const certComment = document.getElementById("certComment");
+    const certRank = document.getElementById("certRank");
+    const certRound = document.getElementById("certRound");
+    const certCount = document.getElementById("certCount");
+    const certPrize = document.getElementById("certPrize");
+    const prizeInputGroup = document.getElementById("prizeInputGroup");
+    const totalPrizeDisplay = document.getElementById("totalPrizeDisplay");
+    const certFeed = document.getElementById("certFeed");
+    const paymentOptions = document.getElementById("paymentOptions");
+    const paymentTitle = document.getElementById("paymentTitle");
+    const paymentMascot = document.getElementById("paymentMascot");
+    const paymentCustom = document.getElementById("paymentCustom");
+
+    // 상세 모달 요소
+    const detailModal = document.getElementById("detailModal");
+    const btnDetailClose = document.getElementById("btnDetailClose");
+    const detailImage = document.getElementById("detailImage");
+    const detailRankBadge = document.getElementById("detailRankBadge");
+    const detailCount = document.getElementById("detailCount");
+    const detailPrizeAmount = document.getElementById("detailPrizeAmount");
+    const detailRound = document.getElementById("detailRound");
+    const detailDate = document.getElementById("detailDate");
+    const detailComment = document.getElementById("detailComment");
+    const detailPayment = document.getElementById("detailPayment");
+    const detailPaymentAmount = document.getElementById("detailPaymentAmount");
+
+    // 결제 확인 모달 요소
+    const paymentConfirmModal = document.getElementById("paymentConfirmModal");
+    const paymentConfirmTitle = document.getElementById("paymentConfirmTitle");
+    const paymentConfirmAmount = document.getElementById("paymentConfirmAmount");
+    const btnPaymentCancel = document.getElementById("btnPaymentCancel");
+    const btnPaymentProceed = document.getElementById("btnPaymentProceed");
+
+    // 명예의 전당 카운트 요소
+    const fameElements = {
+      1: document.getElementById("fame1"),
+      2: document.getElementById("fame2"),
+      3: document.getElementById("fame3"),
+      4: document.getElementById("fame4"),
+      5: document.getElementById("fame5")
+    };
+
+    // ============================================
+    // 후원 설정 - Buy Me a Coffee 사용 (개인정보 노출 없음)
+    // ============================================
+    const SUPPORT_CONFIG = {
+      // Buy Me a Coffee 또는 Ko-fi 링크로 변경
+      // 가입 후 본인 링크로 수정하세요
+      buymeacoffee: "https://www.buymeacoffee.com/yaongsin",
+      kofi: "https://ko-fi.com/yaongsin",
+      // 사용할 플랫폼 선택: "buymeacoffee" 또는 "kofi"
+      platform: "buymeacoffee"
+    };
+
+    // 고정 당첨금 (4등, 5등)
+    const FIXED_PRIZES = {
+      4: 50000,
+      5: 5000
+    };
+
+    // 1회차 시작일 (2002년 12월 7일 토요일)
+    const FIRST_DRAW_DATE = new Date(2002, 11, 7);
+
+    // 회차별 추첨일 계산
+    function getDrawDate(round) {
+      const date = new Date(FIRST_DRAW_DATE);
+      date.setDate(date.getDate() + (round - 1) * 7);
+      return date;
+    }
+
+    // 날짜 포맷 (YY.MM.DD)
+    function formatDate(date) {
+      const yy = String(date.getFullYear()).slice(2);
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
+      return `${yy}.${mm}.${dd}`;
+    }
+
+    // 직전 회차 계산
+    function getLatestRound() {
+      const now = new Date();
+      const diffTime = now - FIRST_DRAW_DATE;
+      const diffWeeks = Math.floor(diffTime / (7 * 24 * 60 * 60 * 1000));
+      let round = diffWeeks + 1;
+
+      // 토요일 21시 이전이면 아직 추첨 전이므로 직전 회차
+      const dayOfWeek = now.getDay();
+      const hour = now.getHours();
+      if (dayOfWeek === 6 && hour < 21) {
+        round = round - 1;
+      }
+
+      return round;
+    }
+
+    // 회차별 당첨금 캐시 (동행복권 API에서 가져온 데이터)
+    const prizeCache = {};
+
+    // 기본 당첨금 (API 실패 시 사용)
+    const DEFAULT_PRIZES = { 1: 2200000000, 2: 55000000, 3: 1500000 };
+
+    // 동행복권 API에서 당첨금 가져오기
+    async function fetchPrizeData(round) {
+      // 이미 캐시에 있으면 반환
+      if (prizeCache[round]) {
+        return prizeCache[round];
+      }
+
+      try {
+        // CORS 프록시 사용 (무료 프록시 - 실서비스에서는 자체 서버 권장)
+        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const apiUrl = `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${round}`;
+
+        const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
+        const data = await response.json();
+
+        if (data.returnValue === "success") {
+          prizeCache[round] = {
+            1: data.firstWinamnt || DEFAULT_PRIZES[1],
+            2: data.secondWinamnt || DEFAULT_PRIZES[2],
+            3: data.thirdWinamnt || DEFAULT_PRIZES[3]
+          };
+          console.log(`${round}회차 당첨금 로드 완료`);
+          return prizeCache[round];
+        }
+      } catch (error) {
+        console.log(`${round}회차 당첨금 로드 실패, 기본값 사용`);
+      }
+
+      return DEFAULT_PRIZES;
+    }
+
+    // 회차별 당첨금 조회 (비동기)
+    async function getPrizeForRound(round, rank) {
+      const data = await fetchPrizeData(round);
+      return data[rank] || 0;
+    }
+
+    // 회차 드롭다운 요소
+    const roundSelector = document.getElementById("roundSelector");
+    const roundSelectorText = document.getElementById("roundSelectorText");
+    const roundList = document.getElementById("roundList");
+
+    // 회차 드롭다운 초기화
+    function initRoundDropdown() {
+      const latestRound = getLatestRound();
+      roundList.innerHTML = "";
+
+      // 최근 100회차 표시
+      for (let round = latestRound; round >= Math.max(1, latestRound - 99); round--) {
+        const drawDate = getDrawDate(round);
+        const dateStr = formatDate(drawDate);
+
+        const item = document.createElement("div");
+        item.className = "round-item";
+        item.dataset.round = round;
+        item.innerHTML = `
+          <span class="round-item-main">${round}회차</span>
+          <span class="round-item-date">(${dateStr})</span>
+        `;
+        item.addEventListener("click", async () => await selectRound(round));
+        roundList.appendChild(item);
+      }
+    }
+
+    // 회차 선택
+    async function selectRound(round) {
+      const drawDate = getDrawDate(round);
+      const dateStr = formatDate(drawDate);
+
+      certRound.value = round;
+      roundSelectorText.innerHTML = `<b>${round}회차</b> (${dateStr})`;
+      roundList.classList.remove("show");
+      roundSelector.classList.remove("open");
+
+      // 선택 표시 업데이트
+      document.querySelectorAll(".round-item").forEach(item => {
+        item.classList.toggle("selected", parseInt(item.dataset.round) === round);
+      });
+
+      // 당첨금 로딩 표시
+      totalPrizeDisplay.textContent = "로딩중...";
+      await calculatePrize();
+    }
+
+    // 드롭다운 토글
+    roundSelector.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = roundList.classList.contains("show");
+      if (isOpen) {
+        roundList.classList.remove("show");
+        roundSelector.classList.remove("open");
+      } else {
+        roundList.classList.add("show");
+        roundSelector.classList.add("open");
+      }
+    });
+
+    // 외부 클릭 시 닫기
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".round-dropdown")) {
+        roundList.classList.remove("show");
+        roundSelector.classList.remove("open");
+      }
+    });
+
+    // 로컬 스토리지에서 데이터 로드
+    let certifications = JSON.parse(localStorage.getItem("certifications") || "[]");
+    let selectedPayment = 10000; // 기본값 1만원
+    let uploadedImageData = null;
+    let pendingCertData = null; // 결제 대기 중인 인증 데이터
+
+    // 금액 포맷팅
+    function formatCurrency(num) {
+      return '₩' + num.toLocaleString('ko-KR');
+    }
+
+    // 금액 파싱 (콤마 제거)
+    function parseCurrency(str) {
+      return parseInt(str.replace(/[^0-9]/g, '')) || 0;
+    }
+
+    // 당첨금 계산 (비동기)
+    async function calculatePrize() {
+      const rank = parseInt(certRank.value);
+      const count = parseInt(certCount.value);
+      const round = parseInt(certRound.value) || getLatestRound();
+      let prizePerTicket = 0;
+
+      if (rank >= 4) {
+        prizePerTicket = FIXED_PRIZES[rank];
+        prizeInputGroup.style.display = 'none';
+      } else {
+        // 1~3등은 회차별 당첨금 자동 조회 (API에서 가져옴)
+        prizePerTicket = await getPrizeForRound(round, rank);
+        certPrize.value = prizePerTicket.toLocaleString('ko-KR');
+        prizeInputGroup.style.display = 'block';
+      }
+
+      const totalPrize = prizePerTicket * count;
+      totalPrizeDisplay.textContent = formatCurrency(totalPrize);
+      return totalPrize;
+    }
+
+    // 당첨 등수/매수 변경 시 자동 계산
+    certRank.addEventListener("change", () => calculatePrize());
+    certCount.addEventListener("change", () => calculatePrize());
+    certPrize.addEventListener("input", (e) => {
+      // 숫자만 입력되도록 포맷팅
+      let val = e.target.value.replace(/[^0-9]/g, '');
+      if (val) {
+        e.target.value = parseInt(val).toLocaleString('ko-KR');
+      }
+      // 수동 입력 시 총액 재계산
+      const count = parseInt(certCount.value);
+      const prizePerTicket = parseCurrency(e.target.value);
+      totalPrizeDisplay.textContent = formatCurrency(prizePerTicket * count);
+    });
+
+    // 복비 섹션 테마 업데이트
+    function updatePaymentTheme() {
+      if (isDark) {
+        paymentTitle.textContent = "🐱 몽마 야옹에게 복비 드리기";
+        paymentMascot.src = "./mascot_happy_dark.png";
+      } else {
+        paymentTitle.textContent = "🐱 야옹신에게 복비 드리기";
+        paymentMascot.src = "./mascot_happy_bright.png";
+      }
+    }
+
+    // 테마 변경 시 복비 섹션도 업데이트
+    const originalUpdateTheme = updateTheme;
+    updateTheme = function() {
+      originalUpdateTheme();
+      updatePaymentTheme();
+    };
+    updatePaymentTheme(); // 초기화
+
+    // 명예의 전당 업데이트
+    function updateHallOfFame() {
+      const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+      certifications.forEach(cert => {
+        if (counts[cert.rank] !== undefined) {
+          counts[cert.rank] += (cert.count || 1);
+        }
+      });
+      for (let i = 1; i <= 5; i++) {
+        fameElements[i].innerHTML = `${counts[i]}<span>명</span>`;
+      }
+    }
+
+    // 인증 피드 렌더링
+    function renderCertFeed() {
+      if (certifications.length === 0) {
+        certFeed.innerHTML = `
+          <div class="cert-empty">
+            <div class="cert-empty-icon">🎱</div>
+            <p>아직 인증된 당첨 내역이 없다냥!<br/>첫 번째 행운의 주인공이 되어보라냥~</p>
+          </div>
+        `;
+        return;
+      }
+
+      certFeed.innerHTML = "";
+      // 최신순 정렬
+      const sorted = [...certifications].sort((a, b) => b.timestamp - a.timestamp);
+
+      sorted.forEach(cert => {
+        const card = document.createElement("div");
+        card.className = "cert-card";
+        card.style.cursor = "pointer";
+
+        const rankLabels = {
+          1: "🥇 1등 당첨",
+          2: "🥈 2등 당첨",
+          3: "🥉 3등 당첨",
+          4: "🎯 4등 당첨",
+          5: "🍀 5등 당첨"
+        };
+
+        const count = cert.count || 1;
+        const countStr = count > 1 ? ` x${count}` : "";
+
+        const dateStr = new Date(cert.timestamp).toLocaleDateString("ko-KR", {
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        });
+
+        // 총 당첨금
+        const totalPrize = cert.totalPrize || 0;
+        const prizeHtml = totalPrize > 0
+          ? `<div class="cert-prize">💰 <span class="cert-prize-amount">${formatCurrency(totalPrize)}</span></div>`
+          : "";
+
+        // 복비 표시
+        const paymentHtml = cert.payment > 0
+          ? `<div class="cert-payment">💝 복비 ${cert.payment.toLocaleString()}원</div>`
+          : "";
+
+        // 회차 표시
+        const roundHtml = cert.round
+          ? `<span class="cert-meta-tag">${cert.round}회</span>`
+          : "";
+
+        card.innerHTML = `
+          <div class="cert-image">
+            ${cert.image ? `<img src="${cert.image}" alt="당첨 인증" />` : "🎱"}
+          </div>
+          <div class="cert-content">
+            <span class="cert-rank-badge rank-${cert.rank}">${rankLabels[cert.rank]}${countStr}</span>
+            ${prizeHtml}
+            <p class="cert-comment">${escapeHtml(cert.comment) || "소감 없음"}</p>
+            <div class="cert-meta">
+              ${roundHtml}
+              <span class="cert-meta-tag">${dateStr}</span>
+            </div>
+            ${paymentHtml}
+          </div>
+        `;
+
+        // 클릭 시 상세 보기
+        card.addEventListener("click", () => openDetailModal(cert));
+
+        certFeed.appendChild(card);
+      });
+    }
+
+    // 상세 모달 열기
+    function openDetailModal(cert) {
+      const rankLabels = {
+        1: "🥇 1등 당첨",
+        2: "🥈 2등 당첨",
+        3: "🥉 3등 당첨",
+        4: "🎯 4등 당첨",
+        5: "🍀 5등 당첨"
+      };
+
+      const count = cert.count || 1;
+      detailImage.src = cert.image || "";
+      detailRankBadge.textContent = rankLabels[cert.rank];
+      detailRankBadge.className = `detail-rank-badge rank-${cert.rank}`;
+      detailCount.textContent = count > 1 ? `x${count}` : "x1";
+      detailCount.style.display = count > 1 ? "inline" : "none";
+
+      const totalPrize = cert.totalPrize || 0;
+      detailPrizeAmount.textContent = formatCurrency(totalPrize);
+
+      detailRound.textContent = cert.round ? `${cert.round}회` : "-";
+      detailDate.textContent = new Date(cert.timestamp).toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+      detailComment.textContent = cert.comment || "소감이 없습니다.";
+
+      if (cert.payment > 0) {
+        detailPayment.style.display = "inline-flex";
+        detailPaymentAmount.textContent = `복비 ${cert.payment.toLocaleString()}원`;
+      } else {
+        detailPayment.style.display = "none";
+      }
+
+      detailModal.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    // 상세 모달 닫기
+    btnDetailClose.addEventListener("click", () => {
+      detailModal.classList.remove("show");
+      document.body.style.overflow = "";
+    });
+    detailModal.addEventListener("click", (e) => {
+      if (e.target === detailModal) {
+        detailModal.classList.remove("show");
+        document.body.style.overflow = "";
+      }
+    });
+
+    // HTML 이스케이프
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // 모달 열기
+    btnAddCert.addEventListener("click", async () => {
+      certModal.classList.add("show");
+      document.body.style.overflow = "hidden";
+      updatePaymentTheme();
+      await resetModal();
+    });
+
+    // 모달 닫기
+    function closeModal() {
+      certModal.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    btnModalClose.addEventListener("click", closeModal);
+    certModal.addEventListener("click", (e) => {
+      if (e.target === certModal) closeModal();
+    });
+
+    // 모달 초기화
+    async function resetModal() {
+      uploadedImageData = null;
+      selectedPayment = 10000;
+      certComment.value = "";
+      certRank.value = "1";
+      certCount.value = "1";
+      certPrize.value = "";
+      paymentCustom.value = "";
+
+      // 회차 드롭다운 초기화
+      initRoundDropdown();
+      await selectRound(getLatestRound());
+
+      uploadArea.innerHTML = `
+        <div class="upload-icon">📷</div>
+        <div class="upload-text">당첨 캡처 이미지를 업로드하세요<br/>(클릭 / 드래그 / Ctrl+V 붙여넣기)</div>
+      `;
+      uploadArea.classList.remove("has-image");
+      document.querySelectorAll(".payment-option").forEach(opt => {
+        if (opt.dataset.amount === "10000") {
+          opt.classList.add("selected");
+        } else {
+          opt.classList.remove("selected");
+        }
+      });
+    }
+
+    // 이미지 업로드 영역 클릭
+    uploadArea.addEventListener("click", () => {
+      certImage.click();
+    });
+
+    // 드래그 앤 드롭
+    uploadArea.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = "var(--mint2)";
+    });
+    uploadArea.addEventListener("dragleave", () => {
+      uploadArea.style.borderColor = "";
+    });
+    uploadArea.addEventListener("drop", (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = "";
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith("image/")) {
+        handleImageUpload(file);
+      }
+    });
+
+    // 클립보드 붙여넣기
+    document.addEventListener("paste", (e) => {
+      if (!certModal.classList.contains("show")) return;
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.startsWith("image/")) {
+          e.preventDefault();
+          const file = items[i].getAsFile();
+          if (file) {
+            handleImageUpload(file);
+            uploadArea.style.borderColor = "var(--btn1)";
+            setTimeout(() => { uploadArea.style.borderColor = ""; }, 500);
+          }
+          break;
+        }
+      }
+    });
+
+    // 이미지 파일 선택
+    certImage.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) handleImageUpload(file);
+    });
+
+    // 이미지 업로드 처리
+    function handleImageUpload(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        uploadedImageData = e.target.result;
+        uploadArea.classList.add("has-image");
+        uploadArea.innerHTML = `<img src="${uploadedImageData}" alt="업로드된 이미지" />`;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // 결제 옵션 선택
+    paymentOptions.addEventListener("click", (e) => {
+      const option = e.target.closest(".payment-option");
+      if (option) {
+        document.querySelectorAll(".payment-option").forEach(opt => opt.classList.remove("selected"));
+        option.classList.add("selected");
+        selectedPayment = parseInt(option.dataset.amount);
+        paymentCustom.value = "";
+      }
+    });
+
+    // 직접 입력
+    paymentCustom.addEventListener("input", () => {
+      const customValue = parseInt(paymentCustom.value) || 0;
+      if (customValue > 0) {
+        document.querySelectorAll(".payment-option").forEach(opt => opt.classList.remove("selected"));
+        selectedPayment = customValue;
+      }
+    });
+
+    paymentCustom.addEventListener("focus", () => {
+      document.querySelectorAll(".payment-option").forEach(opt => opt.classList.remove("selected"));
+    });
+
+    // 복비 스킵
+    if (btnSkipPayment) {
+      btnSkipPayment.addEventListener("click", () => {
+        console.log("복비 스킵 클릭");
+        document.querySelectorAll(".payment-option").forEach(opt => opt.classList.remove("selected"));
+        paymentCustom.value = "";
+        selectedPayment = 0;
+      });
+    } else {
+      console.error("btnSkipPayment 요소를 찾을 수 없습니다");
+    }
+
+    // 인증 제출 버튼 클릭
+    if (btnSubmitCert) {
+      btnSubmitCert.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("인증 게시하기 클릭");
+        try {
+          if (!uploadedImageData) {
+            alert("당첨 인증 이미지를 업로드해주세요!");
+            return;
+          }
+
+          // 회차 확인
+          if (!certRound.value) {
+            alert("회차를 선택해주세요!");
+            return;
+          }
+
+          // 직접 입력 값 확인
+          const customValue = parseInt(paymentCustom.value) || 0;
+          if (customValue > 0) {
+            selectedPayment = customValue;
+          }
+
+          const rank = parseInt(certRank.value);
+          const count = parseInt(certCount.value);
+          let prizePerTicket = 0;
+
+          if (rank >= 4) {
+            prizePerTicket = FIXED_PRIZES[rank];
+          } else {
+            prizePerTicket = parseCurrency(certPrize.value);
+          }
+
+          const totalPrize = prizePerTicket * count;
+
+          // 인증 데이터 준비
+          pendingCertData = {
+            id: Date.now(),
+            rank: rank,
+            count: count,
+            round: certRound.value ? parseInt(certRound.value) : null,
+            prizePerTicket: prizePerTicket,
+            totalPrize: totalPrize,
+            image: uploadedImageData,
+            comment: certComment.value.trim(),
+            payment: selectedPayment,
+            timestamp: Date.now()
+          };
+
+          console.log("pendingCertData 생성:", pendingCertData);
+
+          // 복비가 있으면 결제 확인 모달 표시
+          if (selectedPayment > 0) {
+            const mascotName = isDark ? "몽마 야옹" : "야옹신";
+            paymentConfirmTitle.textContent = `${mascotName}에게 복비 보내기`;
+            paymentConfirmAmount.textContent = formatCurrency(selectedPayment);
+            paymentConfirmModal.classList.add("show");
+            console.log("결제 확인 모달 표시");
+          } else {
+            // 복비 없이 바로 저장
+            console.log("복비 없이 저장 시작");
+            saveCertification();
+          }
+        } catch (error) {
+          console.error("인증 제출 오류:", error);
+          alert("인증 처리 중 오류가 발생했습니다: " + error.message);
+        }
+      });
+    } else {
+      console.error("btnSubmitCert 요소를 찾을 수 없습니다");
+    }
+
+    // 결제 취소
+    if (btnPaymentCancel) {
+      btnPaymentCancel.addEventListener("click", () => {
+        console.log("결제 취소 클릭");
+        paymentConfirmModal.classList.remove("show");
+        pendingCertData = null;
+      });
+    }
+
+    // 후원 플랫폼으로 이동 (Buy Me a Coffee / Ko-fi)
+    if (btnPaymentProceed) {
+      btnPaymentProceed.addEventListener("click", (e) => {
+        console.log("후원하러 가기 클릭");
+        e.preventDefault();
+        e.stopPropagation();
+
+        try {
+          // 인증 먼저 저장
+          saveCertification();
+          paymentConfirmModal.classList.remove("show");
+
+          // 후원 페이지 열기
+          const supportUrl = SUPPORT_CONFIG[SUPPORT_CONFIG.platform];
+          console.log("후원 URL:", supportUrl);
+
+          // 팝업 차단 방지를 위해 직접 링크로도 시도
+          const newWindow = window.open(supportUrl, "_blank");
+          if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+            // 팝업이 차단된 경우 직접 이동 제안
+            if (confirm("팝업이 차단되었습니다. 후원 페이지로 직접 이동하시겠습니까?")) {
+              window.location.href = supportUrl;
+            }
+          }
+
+          const mascotName = isDark ? "몽마 야옹" : "야옹신";
+          setTimeout(() => {
+            setToast(`💝 ${mascotName}에게 후원해주셔서 감사하다냥!`);
+          }, 500);
+        } catch (error) {
+          console.error("후원 처리 오류:", error);
+          alert("오류가 발생했습니다: " + error.message);
+        }
+      });
+    } else {
+      console.error("btnPaymentProceed 요소를 찾을 수 없습니다");
+    }
+
+    // 인증 저장
+    function saveCertification() {
+      console.log("saveCertification 호출됨, pendingCertData:", pendingCertData);
+
+      try {
+        if (!pendingCertData) {
+          console.log("pendingCertData가 없음");
+          return;
+        }
+
+        certifications.push(pendingCertData);
+        localStorage.setItem("certifications", JSON.stringify(certifications));
+        console.log("인증 저장 완료, 총 개수:", certifications.length);
+
+        updateHallOfFame();
+        console.log("명예의 전당 업데이트 완료");
+
+        renderCertFeed();
+        console.log("피드 렌더링 완료");
+
+        closeModal();
+        console.log("모달 닫기 완료");
+
+        const mascotName = isDark ? "몽마 야옹" : "야옹신";
+        const paymentMsg = pendingCertData.payment > 0
+          ? ` ${mascotName}에게 ${pendingCertData.payment.toLocaleString()}원의 복비도 감사하다냥!`
+          : "";
+        setToast(`🎉 인증 완료다냥!${paymentMsg}`);
+
+        if (btnAddCert) {
+          const rect = btnAddCert.getBoundingClientRect();
+          sparkleAt(rect.left + rect.width/2, rect.top + rect.height/2);
+        }
+
+        pendingCertData = null;
+        console.log("인증 저장 프로세스 완료");
+      } catch (error) {
+        console.error("saveCertification 오류:", error);
+        alert("인증 저장 중 오류가 발생했습니다: " + error.message);
+      }
+    }
+
+    // 초기 렌더링
+    updateHallOfFame();
+    renderCertFeed();
+    initRoundDropdown(); // 회차 드롭다운 초기화
+
+    // 디버깅용 콘솔 로그
+    console.log("=== 인증 보드 초기화 완료 ===");
+    console.log("최근 회차:", getLatestRound());
+    console.log("btnSubmitCert:", btnSubmitCert ? "OK" : "NOT FOUND");
+    console.log("btnSkipPayment:", btnSkipPayment ? "OK" : "NOT FOUND");
+    console.log("btnPaymentProceed:", btnPaymentProceed ? "OK" : "NOT FOUND");
+    console.log("btnPaymentCancel:", btnPaymentCancel ? "OK" : "NOT FOUND");
+    console.log("certModal:", certModal ? "OK" : "NOT FOUND");
+    console.log("paymentConfirmModal:", paymentConfirmModal ? "OK" : "NOT FOUND");
+    console.log("저장된 인증 개수:", certifications.length);
   </script>
 </body>
 </html>
