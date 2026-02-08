@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="google-adsense-account" content="ca-pub-7724075885048272">
   <title>🍀 야옹신 로또 번호 추천기</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7724075885048272"
+     crossorigin="anonymous"></script>
 
   <style>
     :root{
@@ -1998,6 +2001,16 @@
         </div>
       </div>
 
+      <!-- 광고 영역 (번호 뽑기 시 표시) -->
+      <div id="adSlot2" style="display:none; text-align:center; margin:12px 0;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-7724075885048272"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+      </div>
+
       <div class="meta">
         <div id="seedInfo">기운: 대기중이냥</div>
         <div id="stamp">대기 중</div>
@@ -2029,6 +2042,15 @@
             <a href="https://www.dhlottery.co.kr/" target="_blank" class="mini-btn" title="동행복권으로 이동">
                 🛒 구매하러 가기
             </a>
+        </div>
+        <!-- 광고 영역 (번호 뽑기/정렬 시 표시) -->
+        <div id="adSlot1" style="display:none; text-align:center; margin:12px 0;">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-7724075885048272"
+               data-ad-slot="auto"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
         </div>
         <div class="sets" id="sets"></div>
       </div>
@@ -2153,7 +2175,7 @@
           <textarea class="comment-input" id="certComment" rows="3" placeholder="야옹신 덕분에 당첨됐다냥! 🎉"></textarea>
         </div>
 
-        <!-- 우측: 복비 결제 (선택) -->
+        <!-- 우측: 복비 후원 (선택) -->
         <div class="modal-section payment-section">
           <h4 class="modal-section-title" id="paymentTitle">🐱 야옹신에게 복비 드리기</h4>
           <div class="payment-mascot">
@@ -2161,31 +2183,15 @@
           </div>
           <p class="payment-desc">
             당첨의 기쁨을 나누고 싶다면,<br/>
-            복비를 드려보세요!<br/>
+            Buy Me a Coffee로 후원해주세요!<br/>
             <small>(선택사항이며, 없이도 인증 가능합니다)</small>
           </p>
-
-          <div class="payment-options" id="paymentOptions">
-            <div class="payment-option" data-amount="1000">☕ 1천원</div>
-            <div class="payment-option" data-amount="5000">🍰 5천원</div>
-            <div class="payment-option" data-amount="10000">💝 1만원</div>
-            <div class="payment-option" data-amount="50000">💎 5만원</div>
-            <div class="payment-option" data-amount="100000">👑 10만원</div>
-            <div class="payment-option" data-amount="300000">🏆 30만원</div>
-          </div>
-
-          <div class="payment-custom">
-            <span class="payment-custom-label">직접 입력:</span>
-            <input type="number" class="payment-custom-input" id="paymentCustom" placeholder="금액" min="0" step="1000" />
-            <span class="payment-custom-label">원</span>
-          </div>
-
-          <div class="payment-skip" id="btnSkipPayment">복비 없이 인증하기</div>
         </div>
       </div>
 
-      <div class="modal-footer">
-        <button type="button" class="submit-btn" id="btnSubmitCert">🎊 인증 게시하기</button>
+      <div class="modal-footer" style="display:flex; gap:10px;">
+        <button type="button" class="submit-btn" id="btnSubmitCert" style="flex:1;">🎊 인증 게시하기</button>
+        <button type="button" class="submit-btn" id="btnSubmitWithDonation" style="flex:1; background:linear-gradient(135deg,#ff813f,#ffdd00); color:#000;">☕ 후원하고 인증하기</button>
       </div>
     </div>
   </div>
@@ -2230,14 +2236,27 @@
       <div class="payment-confirm-icon">💝</div>
       <div class="payment-confirm-title" id="paymentConfirmTitle">야옹신에게 복비 보내기</div>
       <div class="payment-confirm-amount" id="paymentConfirmAmount">₩10,000</div>
-      <div class="payment-confirm-desc">
-        후원 버튼을 누르면 후원 페이지가 열립니다.<br/>
-        개인정보 노출 없이 안전하게 후원할 수 있어요!<br/>
-        인증은 먼저 게시됩니다 🙏
+      <!-- 1단계: BMC 후원 안내 -->
+      <div id="paymentStep1">
+        <div class="payment-confirm-desc">
+          아래 버튼을 누르면 Buy Me a Coffee 페이지가 열립니다.<br/>
+          후원 완료 후 돌아와서 인증을 게시해주세요!
+        </div>
+        <div class="payment-confirm-buttons">
+          <button type="button" class="payment-confirm-btn secondary" id="btnPaymentCancel">취소</button>
+          <button type="button" class="payment-confirm-btn primary" id="btnPaymentProceed">☕ 후원 페이지 열기</button>
+        </div>
       </div>
-      <div class="payment-confirm-buttons">
-        <button type="button" class="payment-confirm-btn secondary" id="btnPaymentCancel">취소</button>
-        <button type="button" class="payment-confirm-btn primary" id="btnPaymentProceed">☕ 후원하러 가기</button>
+      <!-- 2단계: 후원 완료 확인 -->
+      <div id="paymentStep2" style="display:none;">
+        <div class="payment-confirm-desc">
+          후원을 완료하셨나요?<br/>
+          완료 후 아래 버튼을 눌러 인증을 게시하세요!
+        </div>
+        <div class="payment-confirm-buttons">
+          <button type="button" class="payment-confirm-btn secondary" id="btnPaymentRetry">다시 후원하기</button>
+          <button type="button" class="payment-confirm-btn primary" id="btnPaymentDone">✅ 후원 완료! 인증 게시</button>
+        </div>
       </div>
     </div>
   </div>
@@ -2265,6 +2284,18 @@
     const btnTheme   = document.getElementById("btnTheme");
     const btnSort    = document.getElementById("btnSort");
     const sortArea   = document.getElementById("sortArea");
+    const adSlot1    = document.getElementById("adSlot1");
+    const adSlot2    = document.getElementById("adSlot2");
+
+    // 광고 표시 함수
+    function showAd(slotEl) {
+      try {
+        slotEl.style.display = "block";
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.log("광고 로드:", e.message);
+      }
+    }
 
     const inpName    = document.getElementById("inpName");
     const inpBirth   = document.getElementById("inpBirth");
@@ -2780,6 +2811,7 @@
         
         btnSort.textContent = "✨ 정렬 완료!";
         btnSort.disabled = true;
+        showAd(adSlot1);
     });
 
     btnPick.addEventListener("click", async (e) => {
@@ -2859,6 +2891,10 @@
       renderSets(currentSets, luckyNum, baseScore);
       stampEl.textContent = `Time: ${nowStamp()}`;
       setLoading(false);
+
+      // 광고 표시
+      showAd(adSlot1);
+      showAd(adSlot2);
     });
 
     // ... existing listeners ...
@@ -2894,7 +2930,6 @@
     const btnAddCert = document.getElementById("btnAddCert");
     const btnModalClose = document.getElementById("btnModalClose");
     const btnSubmitCert = document.getElementById("btnSubmitCert");
-    const btnSkipPayment = document.getElementById("btnSkipPayment");
     const uploadArea = document.getElementById("uploadArea");
     const certImage = document.getElementById("certImage");
     const certComment = document.getElementById("certComment");
@@ -2905,10 +2940,9 @@
     const prizeInputGroup = document.getElementById("prizeInputGroup");
     const totalPrizeDisplay = document.getElementById("totalPrizeDisplay");
     const certFeed = document.getElementById("certFeed");
-    const paymentOptions = document.getElementById("paymentOptions");
     const paymentTitle = document.getElementById("paymentTitle");
     const paymentMascot = document.getElementById("paymentMascot");
-    const paymentCustom = document.getElementById("paymentCustom");
+    const btnSubmitWithDonation = document.getElementById("btnSubmitWithDonation");
 
     // 상세 모달 요소
     const detailModal = document.getElementById("detailModal");
@@ -2927,8 +2961,12 @@
     const paymentConfirmModal = document.getElementById("paymentConfirmModal");
     const paymentConfirmTitle = document.getElementById("paymentConfirmTitle");
     const paymentConfirmAmount = document.getElementById("paymentConfirmAmount");
+    const paymentStep1 = document.getElementById("paymentStep1");
+    const paymentStep2 = document.getElementById("paymentStep2");
     const btnPaymentCancel = document.getElementById("btnPaymentCancel");
     const btnPaymentProceed = document.getElementById("btnPaymentProceed");
+    const btnPaymentRetry = document.getElementById("btnPaymentRetry");
+    const btnPaymentDone = document.getElementById("btnPaymentDone");
 
     // 명예의 전당 카운트 요소
     const fameElements = {
@@ -2940,16 +2978,10 @@
     };
 
     // ============================================
-    // 후원 설정 - Buy Me a Coffee 사용 (개인정보 노출 없음)
+    // 후원 설정 - Buy Me a Coffee
     // ============================================
-    const SUPPORT_CONFIG = {
-      // Buy Me a Coffee 또는 Ko-fi 링크로 변경
-      // 가입 후 본인 링크로 수정하세요
-      buymeacoffee: "https://www.buymeacoffee.com/yaongsin",
-      kofi: "https://ko-fi.com/yaongsin",
-      // 사용할 플랫폼 선택: "buymeacoffee" 또는 "kofi"
-      platform: "buymeacoffee"
-    };
+    // 본인의 Buy Me a Coffee 링크로 변경하세요
+    const BMC_URL = "https://www.buymeacoffee.com/yaongsin";
 
     // 고정 당첨금 (4등, 5등)
     const FIXED_PRIZES = {
@@ -2992,47 +3024,12 @@
       return round;
     }
 
-    // 회차별 당첨금 캐시 (동행복권 API에서 가져온 데이터)
-    const prizeCache = {};
+    // 예상 당첨금 (고정값)
+    const ESTIMATED_PRIZES = { 1: 2200000000, 2: 55000000, 3: 1500000 };
 
-    // 기본 당첨금 (API 실패 시 사용)
-    const DEFAULT_PRIZES = { 1: 2200000000, 2: 55000000, 3: 1500000 };
-
-    // 동행복권 API에서 당첨금 가져오기
-    async function fetchPrizeData(round) {
-      // 이미 캐시에 있으면 반환
-      if (prizeCache[round]) {
-        return prizeCache[round];
-      }
-
-      try {
-        // CORS 프록시 사용 (무료 프록시 - 실서비스에서는 자체 서버 권장)
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
-        const apiUrl = `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${round}`;
-
-        const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
-        const data = await response.json();
-
-        if (data.returnValue === "success") {
-          prizeCache[round] = {
-            1: data.firstWinamnt || DEFAULT_PRIZES[1],
-            2: data.secondWinamnt || DEFAULT_PRIZES[2],
-            3: data.thirdWinamnt || DEFAULT_PRIZES[3]
-          };
-          console.log(`${round}회차 당첨금 로드 완료`);
-          return prizeCache[round];
-        }
-      } catch (error) {
-        console.log(`${round}회차 당첨금 로드 실패, 기본값 사용`);
-      }
-
-      return DEFAULT_PRIZES;
-    }
-
-    // 회차별 당첨금 조회 (비동기)
-    async function getPrizeForRound(round, rank) {
-      const data = await fetchPrizeData(round);
-      return data[rank] || 0;
+    // 등수별 예상 당첨금 조회
+    function getPrizeForRank(rank) {
+      return ESTIMATED_PRIZES[rank] || 0;
     }
 
     // 회차 드롭다운 요소
@@ -3057,13 +3054,13 @@
           <span class="round-item-main">${round}회차</span>
           <span class="round-item-date">(${dateStr})</span>
         `;
-        item.addEventListener("click", async () => await selectRound(round));
+        item.addEventListener("click", () => selectRound(round));
         roundList.appendChild(item);
       }
     }
 
     // 회차 선택
-    async function selectRound(round) {
+    function selectRound(round) {
       const drawDate = getDrawDate(round);
       const dateStr = formatDate(drawDate);
 
@@ -3077,9 +3074,7 @@
         item.classList.toggle("selected", parseInt(item.dataset.round) === round);
       });
 
-      // 당첨금 로딩 표시
-      totalPrizeDisplay.textContent = "로딩중...";
-      await calculatePrize();
+      calculatePrize();
     }
 
     // 드롭다운 토글
@@ -3103,11 +3098,51 @@
       }
     });
 
-    // 로컬 스토리지에서 데이터 로드
-    let certifications = JSON.parse(localStorage.getItem("certifications") || "[]");
-    let selectedPayment = 10000; // 기본값 1만원
-    let uploadedImageData = null;
-    let pendingCertData = null; // 결제 대기 중인 인증 데이터
+    // 인증 데이터 (API에서 로드)
+    let certifications = [];
+    let uploadedImageFile = null; // File 객체 보관 (base64 대신)
+    let uploadedImagePreview = null; // 미리보기용 data URL
+    let pendingCertData = null; // 후원 대기 중인 인증 데이터
+
+    // ============================================
+    // API 헬퍼 함수
+    // ============================================
+    async function fetchCertifications() {
+      try {
+        const res = await fetch("/api/certifications");
+        if (!res.ok) throw new Error("서버 오류");
+        certifications = await res.json();
+        updateHallOfFame();
+        renderCertFeed();
+      } catch (e) {
+        console.error("인증 목록 로드 실패:", e);
+      }
+    }
+
+    async function postCertification(data) {
+      const formData = new FormData();
+      formData.append("rank", data.rank);
+      formData.append("count", data.count);
+      if (data.round) formData.append("round", data.round);
+      formData.append("prize_per_ticket", data.prizePerTicket);
+      formData.append("total_prize", data.totalPrize);
+      formData.append("comment", data.comment);
+      formData.append("donated", data.donated);
+      if (uploadedImageFile) {
+        formData.append("image", uploadedImageFile);
+      }
+
+      const res = await fetch("/api/certifications", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || "서버 오류");
+      }
+      return res.json();
+    }
 
     // 금액 포맷팅
     function formatCurrency(num) {
@@ -3119,19 +3154,18 @@
       return parseInt(str.replace(/[^0-9]/g, '')) || 0;
     }
 
-    // 당첨금 계산 (비동기)
-    async function calculatePrize() {
+    // 당첨금 계산
+    function calculatePrize() {
       const rank = parseInt(certRank.value);
       const count = parseInt(certCount.value);
-      const round = parseInt(certRound.value) || getLatestRound();
       let prizePerTicket = 0;
 
       if (rank >= 4) {
         prizePerTicket = FIXED_PRIZES[rank];
         prizeInputGroup.style.display = 'none';
       } else {
-        // 1~3등은 회차별 당첨금 자동 조회 (API에서 가져옴)
-        prizePerTicket = await getPrizeForRound(round, rank);
+        // 1~3등은 예상 당첨금 고정값 사용
+        prizePerTicket = getPrizeForRank(rank);
         certPrize.value = prizePerTicket.toLocaleString('ko-KR');
         prizeInputGroup.style.display = 'block';
       }
@@ -3201,10 +3235,8 @@
       }
 
       certFeed.innerHTML = "";
-      // 최신순 정렬
-      const sorted = [...certifications].sort((a, b) => b.timestamp - a.timestamp);
-
-      sorted.forEach(cert => {
+      // API에서 이미 최신순 정렬되어 옴
+      certifications.forEach(cert => {
         const card = document.createElement("div");
         card.className = "cert-card";
         card.style.cursor = "pointer";
@@ -3220,21 +3252,21 @@
         const count = cert.count || 1;
         const countStr = count > 1 ? ` x${count}` : "";
 
-        const dateStr = new Date(cert.timestamp).toLocaleDateString("ko-KR", {
+        const dateStr = new Date(cert.created_at).toLocaleDateString("ko-KR", {
           year: "numeric",
           month: "long",
           day: "numeric"
         });
 
         // 총 당첨금
-        const totalPrize = cert.totalPrize || 0;
+        const totalPrize = cert.total_prize || 0;
         const prizeHtml = totalPrize > 0
           ? `<div class="cert-prize">💰 <span class="cert-prize-amount">${formatCurrency(totalPrize)}</span></div>`
           : "";
 
-        // 복비 표시
-        const paymentHtml = cert.payment > 0
-          ? `<div class="cert-payment">💝 복비 ${cert.payment.toLocaleString()}원</div>`
+        // 후원 표시
+        const paymentHtml = cert.donated
+          ? `<div class="cert-payment">☕ 후원 완료</div>`
           : "";
 
         // 회차 표시
@@ -3244,7 +3276,7 @@
 
         card.innerHTML = `
           <div class="cert-image">
-            ${cert.image ? `<img src="${cert.image}" alt="당첨 인증" />` : "🎱"}
+            ${cert.image_url ? `<img src="${cert.image_url}" alt="당첨 인증" />` : "🎱"}
           </div>
           <div class="cert-content">
             <span class="cert-rank-badge rank-${cert.rank}">${rankLabels[cert.rank]}${countStr}</span>
@@ -3276,17 +3308,17 @@
       };
 
       const count = cert.count || 1;
-      detailImage.src = cert.image || "";
+      detailImage.src = cert.image_url || "";
       detailRankBadge.textContent = rankLabels[cert.rank];
       detailRankBadge.className = `detail-rank-badge rank-${cert.rank}`;
       detailCount.textContent = count > 1 ? `x${count}` : "x1";
       detailCount.style.display = count > 1 ? "inline" : "none";
 
-      const totalPrize = cert.totalPrize || 0;
+      const totalPrize = cert.total_prize || 0;
       detailPrizeAmount.textContent = formatCurrency(totalPrize);
 
       detailRound.textContent = cert.round ? `${cert.round}회` : "-";
-      detailDate.textContent = new Date(cert.timestamp).toLocaleDateString("ko-KR", {
+      detailDate.textContent = new Date(cert.created_at).toLocaleDateString("ko-KR", {
         year: "numeric",
         month: "long",
         day: "numeric"
@@ -3294,9 +3326,9 @@
 
       detailComment.textContent = cert.comment || "소감이 없습니다.";
 
-      if (cert.payment > 0) {
+      if (cert.donated) {
         detailPayment.style.display = "inline-flex";
-        detailPaymentAmount.textContent = `복비 ${cert.payment.toLocaleString()}원`;
+        detailPaymentAmount.textContent = "☕ 후원 완료";
       } else {
         detailPayment.style.display = "none";
       }
@@ -3329,7 +3361,7 @@
       certModal.classList.add("show");
       document.body.style.overflow = "hidden";
       updatePaymentTheme();
-      await resetModal();
+      resetModal();
     });
 
     // 모달 닫기
@@ -3344,31 +3376,23 @@
     });
 
     // 모달 초기화
-    async function resetModal() {
-      uploadedImageData = null;
-      selectedPayment = 10000;
+    function resetModal() {
+      uploadedImageFile = null;
+      uploadedImagePreview = null;
       certComment.value = "";
       certRank.value = "1";
       certCount.value = "1";
       certPrize.value = "";
-      paymentCustom.value = "";
 
       // 회차 드롭다운 초기화
       initRoundDropdown();
-      await selectRound(getLatestRound());
+      selectRound(getLatestRound());
 
       uploadArea.innerHTML = `
         <div class="upload-icon">📷</div>
         <div class="upload-text">당첨 캡처 이미지를 업로드하세요<br/>(클릭 / 드래그 / Ctrl+V 붙여넣기)</div>
       `;
       uploadArea.classList.remove("has-image");
-      document.querySelectorAll(".payment-option").forEach(opt => {
-        if (opt.dataset.amount === "10000") {
-          opt.classList.add("selected");
-        } else {
-          opt.classList.remove("selected");
-        }
-      });
     }
 
     // 이미지 업로드 영역 클릭
@@ -3420,199 +3444,145 @@
 
     // 이미지 업로드 처리
     function handleImageUpload(file) {
+      uploadedImageFile = file; // File 객체 보관 (API 전송용)
       const reader = new FileReader();
       reader.onload = (e) => {
-        uploadedImageData = e.target.result;
+        uploadedImagePreview = e.target.result;
         uploadArea.classList.add("has-image");
-        uploadArea.innerHTML = `<img src="${uploadedImageData}" alt="업로드된 이미지" />`;
+        uploadArea.innerHTML = `<img src="${uploadedImagePreview}" alt="업로드된 이미지" />`;
       };
       reader.readAsDataURL(file);
     }
 
-    // 결제 옵션 선택
-    paymentOptions.addEventListener("click", (e) => {
-      const option = e.target.closest(".payment-option");
-      if (option) {
-        document.querySelectorAll(".payment-option").forEach(opt => opt.classList.remove("selected"));
-        option.classList.add("selected");
-        selectedPayment = parseInt(option.dataset.amount);
-        paymentCustom.value = "";
+    // 인증 데이터 준비 (공통)
+    function prepareCertData(donated) {
+      if (!uploadedImageFile) {
+        alert("당첨 인증 이미지를 업로드해주세요!");
+        return null;
       }
-    });
-
-    // 직접 입력
-    paymentCustom.addEventListener("input", () => {
-      const customValue = parseInt(paymentCustom.value) || 0;
-      if (customValue > 0) {
-        document.querySelectorAll(".payment-option").forEach(opt => opt.classList.remove("selected"));
-        selectedPayment = customValue;
+      if (!certRound.value) {
+        alert("회차를 선택해주세요!");
+        return null;
       }
-    });
 
-    paymentCustom.addEventListener("focus", () => {
-      document.querySelectorAll(".payment-option").forEach(opt => opt.classList.remove("selected"));
-    });
+      const rank = parseInt(certRank.value);
+      const count = parseInt(certCount.value);
+      let prizePerTicket = 0;
 
-    // 복비 스킵
-    if (btnSkipPayment) {
-      btnSkipPayment.addEventListener("click", () => {
-        console.log("복비 스킵 클릭");
-        document.querySelectorAll(".payment-option").forEach(opt => opt.classList.remove("selected"));
-        paymentCustom.value = "";
-        selectedPayment = 0;
-      });
-    } else {
-      console.error("btnSkipPayment 요소를 찾을 수 없습니다");
+      if (rank >= 4) {
+        prizePerTicket = FIXED_PRIZES[rank];
+      } else {
+        prizePerTicket = parseCurrency(certPrize.value);
+      }
+
+      return {
+        rank: rank,
+        count: count,
+        round: certRound.value ? parseInt(certRound.value) : null,
+        prizePerTicket: prizePerTicket,
+        totalPrize: prizePerTicket * count,
+        comment: certComment.value.trim(),
+        donated: donated,
+      };
     }
 
-    // 인증 제출 버튼 클릭
+    // "인증 게시하기" 버튼 (후원 없이)
     if (btnSubmitCert) {
       btnSubmitCert.addEventListener("click", async (e) => {
         e.preventDefault();
-        e.stopPropagation();
-        console.log("인증 게시하기 클릭");
-        try {
-          if (!uploadedImageData) {
-            alert("당첨 인증 이미지를 업로드해주세요!");
-            return;
-          }
-
-          // 회차 확인
-          if (!certRound.value) {
-            alert("회차를 선택해주세요!");
-            return;
-          }
-
-          // 직접 입력 값 확인
-          const customValue = parseInt(paymentCustom.value) || 0;
-          if (customValue > 0) {
-            selectedPayment = customValue;
-          }
-
-          const rank = parseInt(certRank.value);
-          const count = parseInt(certCount.value);
-          let prizePerTicket = 0;
-
-          if (rank >= 4) {
-            prizePerTicket = FIXED_PRIZES[rank];
-          } else {
-            prizePerTicket = parseCurrency(certPrize.value);
-          }
-
-          const totalPrize = prizePerTicket * count;
-
-          // 인증 데이터 준비
-          pendingCertData = {
-            id: Date.now(),
-            rank: rank,
-            count: count,
-            round: certRound.value ? parseInt(certRound.value) : null,
-            prizePerTicket: prizePerTicket,
-            totalPrize: totalPrize,
-            image: uploadedImageData,
-            comment: certComment.value.trim(),
-            payment: selectedPayment,
-            timestamp: Date.now()
-          };
-
-          console.log("pendingCertData 생성:", pendingCertData);
-
-          // 복비가 있으면 결제 확인 모달 표시
-          if (selectedPayment > 0) {
-            const mascotName = isDark ? "몽마 야옹" : "야옹신";
-            paymentConfirmTitle.textContent = `${mascotName}에게 복비 보내기`;
-            paymentConfirmAmount.textContent = formatCurrency(selectedPayment);
-            paymentConfirmModal.classList.add("show");
-            console.log("결제 확인 모달 표시");
-          } else {
-            // 복비 없이 바로 저장
-            console.log("복비 없이 저장 시작");
-            saveCertification();
-          }
-        } catch (error) {
-          console.error("인증 제출 오류:", error);
-          alert("인증 처리 중 오류가 발생했습니다: " + error.message);
-        }
+        const data = prepareCertData(false);
+        if (!data) return;
+        pendingCertData = data;
+        await saveCertification();
       });
-    } else {
-      console.error("btnSubmitCert 요소를 찾을 수 없습니다");
+    }
+
+    // "후원하고 인증하기" 버튼 → BMC 2단계 플로우
+    if (btnSubmitWithDonation) {
+      btnSubmitWithDonation.addEventListener("click", (e) => {
+        e.preventDefault();
+        const data = prepareCertData(true);
+        if (!data) return;
+        pendingCertData = data;
+        const mascotName = isDark ? "몽마 야옹" : "야옹신";
+        paymentConfirmTitle.textContent = `${mascotName}에게 복비 보내기`;
+        paymentConfirmAmount.textContent = "☕ Buy Me a Coffee";
+        paymentConfirmModal.classList.add("show");
+      });
+    }
+
+    // BMC 후원 페이지 열기
+    function openBMC() {
+      const newWindow = window.open(BMC_URL, "_blank");
+      if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+        if (confirm("팝업이 차단되었습니다. 후원 페이지로 직접 이동하시겠습니까?")) {
+          window.location.href = BMC_URL;
+        }
+      }
+    }
+
+    // 결제 확인 모달 초기화 (1단계로 리셋)
+    function resetPaymentSteps() {
+      paymentStep1.style.display = "";
+      paymentStep2.style.display = "none";
     }
 
     // 결제 취소
     if (btnPaymentCancel) {
       btnPaymentCancel.addEventListener("click", () => {
-        console.log("결제 취소 클릭");
         paymentConfirmModal.classList.remove("show");
+        resetPaymentSteps();
         pendingCertData = null;
       });
     }
 
-    // 후원 플랫폼으로 이동 (Buy Me a Coffee / Ko-fi)
+    // 1단계: 후원 페이지 열기
     if (btnPaymentProceed) {
       btnPaymentProceed.addEventListener("click", (e) => {
-        console.log("후원하러 가기 클릭");
         e.preventDefault();
-        e.stopPropagation();
-
-        try {
-          // 인증 먼저 저장
-          saveCertification();
-          paymentConfirmModal.classList.remove("show");
-
-          // 후원 페이지 열기
-          const supportUrl = SUPPORT_CONFIG[SUPPORT_CONFIG.platform];
-          console.log("후원 URL:", supportUrl);
-
-          // 팝업 차단 방지를 위해 직접 링크로도 시도
-          const newWindow = window.open(supportUrl, "_blank");
-          if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-            // 팝업이 차단된 경우 직접 이동 제안
-            if (confirm("팝업이 차단되었습니다. 후원 페이지로 직접 이동하시겠습니까?")) {
-              window.location.href = supportUrl;
-            }
-          }
-
-          const mascotName = isDark ? "몽마 야옹" : "야옹신";
-          setTimeout(() => {
-            setToast(`💝 ${mascotName}에게 후원해주셔서 감사하다냥!`);
-          }, 500);
-        } catch (error) {
-          console.error("후원 처리 오류:", error);
-          alert("오류가 발생했습니다: " + error.message);
-        }
+        openBMC();
+        paymentStep1.style.display = "none";
+        paymentStep2.style.display = "";
       });
-    } else {
-      console.error("btnPaymentProceed 요소를 찾을 수 없습니다");
     }
 
-    // 인증 저장
-    function saveCertification() {
-      console.log("saveCertification 호출됨, pendingCertData:", pendingCertData);
+    // 2단계: 다시 후원하기
+    if (btnPaymentRetry) {
+      btnPaymentRetry.addEventListener("click", (e) => {
+        e.preventDefault();
+        openBMC();
+      });
+    }
 
+    // 2단계: 후원 완료 → 인증 게시
+    if (btnPaymentDone) {
+      btnPaymentDone.addEventListener("click", async (e) => {
+        e.preventDefault();
+        await saveCertification();
+        paymentConfirmModal.classList.remove("show");
+        resetPaymentSteps();
+        const mascotName = isDark ? "몽마 야옹" : "야옹신";
+        setTimeout(() => {
+          setToast(`☕ ${mascotName}에게 후원 감사하다냥!`);
+        }, 300);
+      });
+    }
+
+    // 인증 저장 (API 호출)
+    async function saveCertification() {
       try {
-        if (!pendingCertData) {
-          console.log("pendingCertData가 없음");
-          return;
-        }
+        if (!pendingCertData) return;
 
-        certifications.push(pendingCertData);
-        localStorage.setItem("certifications", JSON.stringify(certifications));
-        console.log("인증 저장 완료, 총 개수:", certifications.length);
+        // 저장 중 표시
+        setToast("⏳ 인증 저장 중...");
 
-        updateHallOfFame();
-        console.log("명예의 전당 업데이트 완료");
+        await postCertification(pendingCertData);
 
-        renderCertFeed();
-        console.log("피드 렌더링 완료");
+        // 피드 새로고침
+        await fetchCertifications();
 
         closeModal();
-        console.log("모달 닫기 완료");
-
-        const mascotName = isDark ? "몽마 야옹" : "야옹신";
-        const paymentMsg = pendingCertData.payment > 0
-          ? ` ${mascotName}에게 ${pendingCertData.payment.toLocaleString()}원의 복비도 감사하다냥!`
-          : "";
-        setToast(`🎉 인증 완료다냥!${paymentMsg}`);
+        setToast(`🎉 인증 완료다냥!`);
 
         if (btnAddCert) {
           const rect = btnAddCert.getBoundingClientRect();
@@ -3620,7 +3590,6 @@
         }
 
         pendingCertData = null;
-        console.log("인증 저장 프로세스 완료");
       } catch (error) {
         console.error("saveCertification 오류:", error);
         alert("인증 저장 중 오류가 발생했습니다: " + error.message);
@@ -3628,20 +3597,9 @@
     }
 
     // 초기 렌더링
-    updateHallOfFame();
-    renderCertFeed();
-    initRoundDropdown(); // 회차 드롭다운 초기화
-
-    // 디버깅용 콘솔 로그
+    initRoundDropdown();
+    fetchCertifications(); // API에서 인증 데이터 로드
     console.log("=== 인증 보드 초기화 완료 ===");
-    console.log("최근 회차:", getLatestRound());
-    console.log("btnSubmitCert:", btnSubmitCert ? "OK" : "NOT FOUND");
-    console.log("btnSkipPayment:", btnSkipPayment ? "OK" : "NOT FOUND");
-    console.log("btnPaymentProceed:", btnPaymentProceed ? "OK" : "NOT FOUND");
-    console.log("btnPaymentCancel:", btnPaymentCancel ? "OK" : "NOT FOUND");
-    console.log("certModal:", certModal ? "OK" : "NOT FOUND");
-    console.log("paymentConfirmModal:", paymentConfirmModal ? "OK" : "NOT FOUND");
-    console.log("저장된 인증 개수:", certifications.length);
   </script>
 </body>
 </html>

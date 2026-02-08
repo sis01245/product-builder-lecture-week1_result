@@ -1,7 +1,11 @@
 {
-  "name": "lotto-saju-web",
+  "name": "luckygod-meow-saju-lotto",
   "compatibility_date": "2026-02-03",
-  "assets": {
-    "directory": "./lotto_service/saju_lotto"
-  }
+  "pages_build_output_dir": "./lotto_service/saju_lotto",
+  "r2_buckets": [
+    {
+      "binding": "IMAGES",
+      "bucket_name": "saju-lotto-images"
+    }
+  ]
 }
